@@ -1,12 +1,10 @@
 import './ItemCard.css';
-import shirt from '../../assets/shirt.png';
-
-function ItemCard(){
+function ItemCard({data}){
     
     return(
       <div className="ItemCard" >
-        <p className="ItemCard__title">T-shirt</p>
-       <img src={shirt} className='ItemCard__item' alt="Clothing Item" />
+        <p className="ItemCard__title">{data.name}</p>
+       <img src={data.link} className='ItemCard__item' alt={data.name} />
       </div>
     )
 }
