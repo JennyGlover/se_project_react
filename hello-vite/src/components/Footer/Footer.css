@@ -1,0 +1,9 @@
+.Footer{
+display: flex;
+justify-content: space-between;
+}
+
+.Footer__author, .Footer__date{
+  font-size: 16px; 
+  font-weight: medium;  
+}

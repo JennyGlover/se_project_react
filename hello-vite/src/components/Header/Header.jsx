@@ -7,16 +7,16 @@ function Header(){
 
     return (
       <div className="Header">
-        <span className='header__page-info'>
+        <span className='Header__page-info'>
         <img src={logo} alt="App Logo" />
-        <p className="header__text">{currentDate}, New York</p>
+        <p className="Header__text">{currentDate}, New York</p>
         </span>
-        <span className='header__user-info'>
-        <span className='header__menu'>
-        <button className="header__button">+ Add clothes</button>
-        <p className="header__text">Terrence Tegegne</p>
+        <span className='Header__user-info'>
+        <span className='Header__menu'>
+        <button className="Header__button">+ Add clothes</button>
+        <p className="Header__text">Terrence Tegegne</p>
         </span>
-        <img src={defaultAvatar} className="header__avatar" alt="User Profile"/>
+        <img src={defaultAvatar} className="Header__avatar" alt="User Profile"/>
         </span>
       </div>
     );
