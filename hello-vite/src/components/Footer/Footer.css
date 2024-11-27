@@ -1,11 +1,12 @@
-.Footer{
-display: flex;
-justify-content: space-between;
-margin-left: 41px;
-margin-right: 41px;
+.Footer {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 41px;
+  margin-right: 41px;
 }
 
-.Footer__author, .Footer__date{
-  font-size: 16px; 
-  font-weight: medium;  
+.Footer__author,
+.Footer__date {
+  font-size: 16px;
+  font-weight: medium;
 }

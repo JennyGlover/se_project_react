@@ -1,41 +1,44 @@
-.Header{
- display: flex;
- justify-content: space-between;
- margin-left: 41px;
- margin-right: 41px;
- padding-top: 32px;
+.Header {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 41px;
+  margin-right: 41px;
+  padding-top: 32px;
 }
 
-.Header__page-info, .Header__user-info, .Header__menu{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.Header__page-info,
+.Header__user-info,
+.Header__menu {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.Header__page-info{
-   gap: 24px;
+.Header__page-info {
+  gap: 24px;
 }
 
 .Header__user-info {
-    gap: 88px;
+  gap: 88px;
 }
 
-.Header__menu{
-    gap: 20px ;
+.Header__menu {
+  gap: 20px;
 }
 
-.Header__text, .Header__button{
-    font-weight: bold;
-    font-size: 20px;
+.Header__text,
+.Header__button {
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.Header__button{
-    border: none;
-    background-color: rgba(255, 228, 196, 0);
-    cursor: pointer;
+.Header__button {
+  border: none;
+  background-color: rgba(255, 228, 196, 0);
+  cursor: pointer;
 }
 
-.Header__avatar{
-    height: 40px;
-    width: 40px;
+.Header__avatar {
+  height: 40px;
+  width: 40px;
 }

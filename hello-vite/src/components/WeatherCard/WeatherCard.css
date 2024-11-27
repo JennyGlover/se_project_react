@@ -1,20 +1,18 @@
-
-.WeatherCard{
-    margin-top: 28px;
-    height: 80px;
-    background-color: #00A3FF ;
-    border-radius: 12px;
-    color: white;
-    font-size: 36px;
-    display: flex;
-    justify-content: space-between;
-    overflow: hidden;
+.WeatherCard {
+  margin-top: 28px;
+  height: 80px;
+  background-color: #00a3ff;
+  border-radius: 12px;
+  color: white;
+  font-size: 36px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
 }
 
-
-.WeatherCard__text{
-    margin-left: 16px;
-    align-self: center;
+.WeatherCard__text {
+  margin-left: 16px;
+  align-self: center;
 }
 
 /* .WeatherCard__image{

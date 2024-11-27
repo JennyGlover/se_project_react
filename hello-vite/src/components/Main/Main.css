@@ -1,26 +1,24 @@
-
-.Main{
-margin-left: 41px;
-margin-right: 41px;
+.Main {
+  margin-left: 41px;
+  margin-right: 41px;
 }
-.Main__weather-info{
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 34px;
-}
-
-.Main__item-cards{
-    list-style: none;
-    display: grid;
-    justify-content: space-between;
-    grid-template-columns: repeat(4, 328px);
-    grid-template-rows: repeat(2, 1fr) ;
-    margin: 0;
-    padding: 0;
-    
+.Main__weather-info {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 34px;
 }
 
-.Main__item-card{
-    width: fit-content;
-    margin-bottom: 30px;
+.Main__item-cards {
+  list-style: none;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(4, 328px);
+  grid-template-rows: repeat(2, 1fr);
+  margin: 0;
+  padding: 0;
+}
+
+.Main__item-card {
+  width: fit-content;
+  margin-bottom: 30px;
 }
