@@ -1,4 +1,4 @@
-.weatherCard {
+.WeatherCard {
   margin-top: 28px;
   height: 80px;
   background-color: #00a3ff;
@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 
-.weatherCard__text {
+.WeatherCard__text {
   margin-left: 16px;
   align-self: center;
 }
