@@ -1,4 +1,4 @@
-import './ModalWithForm.css';
+import './modalWithForm.css';
 
 function ModalWithForm({
   onClose,
@@ -10,23 +10,23 @@ function ModalWithForm({
 }) {
   return (
     <div
-      className="ModalWithForm"
+      className="modalWithForm"
       style={{ display: isFormModalVisible ? 'flex' : 'none' }}
     >
       <form
         action=""
-        className={`ModalWithForm__form ModalWithForm__form_type_${name}`}
+        className={`modalWithForm__form modalWithForm__form_type_${name}`}
       >
-        <p className="ModalWithForm__form-title">{title}</p>
+        <p className="modalWithForm__form-title">{title}</p>
         <button
           type="button"
-          className="ModalWithForm__close-btn"
+          className="modalWithForm__close-btn"
           onClick={() => {
             onClose();
           }}
         ></button>
         {children}
-        <button type="submit" className="ModalWithForm__submit-button">
+        <button type="submit" className="modalWithForm__submit-button">
           {buttonText}
         </button>
       </form>

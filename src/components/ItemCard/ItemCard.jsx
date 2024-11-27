@@ -1,14 +1,14 @@
-import './ItemCard.css';
+import './itemCard.css';
 function ItemCard({ data, handleCardClick }) {
   return (
     <div
-      className="ItemCard"
+      className="itemCard"
       onClick={() => {
         handleCardClick(data);
       }}
     >
-      <p className="ItemCard__title">{data.name}</p>
-      <img src={data.link} className="ItemCard__item" alt={data.name} />
+      <p className="itemCard__title">{data.name}</p>
+      <img src={data.link} className="itemCard__item" alt={data.name} />
     </div>
   );
 }
