@@ -1,14 +1,14 @@
-.main {
+.Main {
   margin-left: 41px;
   margin-right: 41px;
 }
-.main__weather-info {
+.Main__weather-info {
   font-weight: bold;
   font-size: 20px;
   margin-top: 34px;
 }
 
-.main__item-cards {
+.Main__item-cards {
   list-style: none;
   display: grid;
   justify-content: space-between;
@@ -18,7 +18,7 @@
   padding: 0;
 }
 
-.main__item-card {
+.Main__item-card {
   width: fit-content;
   margin-bottom: 30px;
 }

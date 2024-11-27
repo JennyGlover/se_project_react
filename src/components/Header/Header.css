@@ -1,4 +1,4 @@
-.header {
+.Header {
   display: flex;
   justify-content: space-between;
   margin-left: 41px;
@@ -6,39 +6,39 @@
   padding-top: 32px;
 }
 
-.header__page-info,
-.header__user-info,
-.header__menu {
+.Header__page-info,
+.Header__user-info,
+.Header__menu {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.header__page-info {
+.Header__page-info {
   gap: 24px;
 }
 
-.header__user-info {
+.Header__user-info {
   gap: 88px;
 }
 
-.header__menu {
+.Header__menu {
   gap: 20px;
 }
 
-.header__text,
-.header__button {
+.Header__text,
+.Header__button {
   font-weight: bold;
   font-size: 20px;
 }
 
-.header__button {
+.Header__button {
   border: none;
   background-color: rgba(255, 228, 196, 0);
   cursor: pointer;
 }
 
-.header__avatar {
+.Header__avatar {
   height: 40px;
   width: 40px;
 }

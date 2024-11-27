@@ -1,4 +1,4 @@
-import './header.css';
+import './Header.css';
 import logo from '../../assets/logo.png';
 import defaultAvatar from '../../assets/default-avatar.png';
 
@@ -9,28 +9,28 @@ function Header({ handleAddButtonClick, weather }) {
   });
 
   return (
-    <div className="header">
-      <span className="header__page-info">
+    <div className="Header">
+      <span className="Header__page-info">
         <img src={logo} alt="App Logo" />
-        <p className="header__text">
+        <p className="Header__text">
           {currentDate}, {weather.cityName}
         </p>
       </span>
-      <span className="header__user-info">
-        <span className="header__menu">
+      <span className="Header__user-info">
+        <span className="Header__menu">
           <button
-            className="header__button"
+            className="Header__button"
             onClick={() => {
               handleAddButtonClick();
             }}
           >
             + Add clothes
           </button>
-          <p className="header__text">Terrence Tegegne</p>
+          <p className="Header__text">Terrence Tegegne</p>
         </span>
         <img
           src={defaultAvatar}
-          className="header__avatar"
+          className="Header__avatar"
           alt="User Profile"
         />
       </span>

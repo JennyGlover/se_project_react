@@ -1,4 +1,4 @@
-import './app.css';
+import './App.css';
 import { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -40,7 +40,7 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className="App">
       <ModalWithForm
         onClose={onClose}
         isFormModalVisible={isFormModalVisible}
@@ -48,55 +48,55 @@ function App() {
         buttonText="Add garment"
         name="add-garment"
       >
-        <label htmlFor="mame" className="modalWithForm__input-label">
+        <label htmlFor="mame" className="ModalWithForm__input-label">
           Name
         </label>
         <input
           type="text"
-          className="modalWithForm__input"
+          className="ModalWithForm__input"
           placeholder="Name"
           id="name"
         />
-        <label htmlFor="image" className="modalWithForm__input-label">
+        <label htmlFor="image" className="ModalWithForm__input-label">
           Image
         </label>
         <input
           type="text"
-          className="modalWithForm__input"
+          className="ModalWithForm__input"
           placeholder="Image URL"
           id="image"
         />
-        <fieldset className="modalWithForm__radio-buttons">
-          <legend className="modalWithForm__legend">
+        <fieldset className="ModalWithForm__radio-buttons">
+          <legend className="ModalWithForm__legend">
             Select the Weather type:
           </legend>
-          <label className="modalWithForm__radio" htmlFor="weather-hot">
+          <label className="ModalWithForm__radio" htmlFor="weather-hot">
             <input
               type="radio"
               name="weatherType"
               value="hot"
               id="weather-hot"
-              className="modalWithForm__radio-input"
+              className="ModalWithForm__radio-input"
             />
             <span>Hot</span>
           </label>
-          <label className="modalWithForm__radio" htmlFor="weather-warm">
+          <label className="ModalWithForm__radio" htmlFor="weather-warm">
             <input
               type="radio"
               name="weatherType"
               value="warm"
               id="weather-warm"
-              className="modalWithForm__radio-input"
+              className="ModalWithForm__radio-input"
             />
             <span>Warm</span>
           </label>
-          <label className="modalWithForm__radio" htmlFor="weather-cold">
+          <label className="ModalWithForm__radio" htmlFor="weather-cold">
             <input
               type="radio"
               name="weatherType"
               value="cold"
               id="weather-cold"
-              className="modalWithForm__radio-input"
+              className="ModalWithForm__radio-input"
             />
             <span>Cold</span>
           </label>

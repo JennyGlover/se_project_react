@@ -1,4 +1,4 @@
-.modalWithForm {
+.ModalWithForm {
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
@@ -9,7 +9,7 @@
   justify-content: center;
 }
 
-.modalWithForm__form {
+.ModalWithForm__form {
   height: 436px;
   width: 436px;
   background-color: white;
@@ -23,7 +23,7 @@
   font-size: 16px;
   font-weight: bold;
 }
-.modalWithForm__close-btn {
+.ModalWithForm__close-btn {
   width: 16px;
   height: 16px;
   background-color: white;
@@ -35,31 +35,31 @@
   cursor: pointer;
 }
 
-.modalWithForm__input {
+.ModalWithForm__input {
   margin-bottom: 24px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   margin-top: 8px;
   font-weight: bold;
 }
-.modalWithForm__radio {
+.ModalWithForm__radio {
   color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-.modalWithForm__radio-input {
+.ModalWithForm__radio-input {
   margin-right: 8px;
   cursor: pointer;
   accent-color: rgb(0, 0, 0);
 }
 
-.modalWithForm__radio-input:checked + span {
+.ModalWithForm__radio-input:checked + span {
   color: rgb(0, 0, 0);
 }
 
-.modalWithForm__submit-button {
+.ModalWithForm__submit-button {
   width: 124px;
   height: 36px;
   margin-top: 32px;
@@ -71,11 +71,11 @@
   cursor: pointer;
 }
 
-.modalWithForm__legend {
+.ModalWithForm__legend {
   margin-bottom: 12px;
 }
 
-.modalWithForm__radio-buttons {
+.ModalWithForm__radio-buttons {
   border: none;
   display: flex;
   flex-direction: column;

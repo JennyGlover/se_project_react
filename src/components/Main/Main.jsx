@@ -1,22 +1,22 @@
-import './main.css';
+import './Main.css';
 import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';
 
 function Main({ defaultClothingItems, weather, handleCardClick }) {
   return (
-    <div className="main">
+    <div className="Main">
       <WeatherCard weatherData={weather} />
-      <p className="main__weather-info">
+      <p className="Main__weather-info">
         Today is {weather.temperature}°F you may want to wear:{' '}
       </p>
-      <ul className="main__item-cards">
+      <ul className="Main__item-cards">
         {defaultClothingItems
           .filter((item) => item.weather === weather.weatherType) // Filter by weather type
           .map(
             (
               filteredItem, // Render filtered items
             ) => (
-              <li key={filteredItem._id} className="main__item-card">
+              <li key={filteredItem._id} className="Main__item-card">
                 <ItemCard
                   data={filteredItem}
                   handleCardClick={handleCardClick}
