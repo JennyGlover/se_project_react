@@ -14,7 +14,7 @@ const describeWeather = (temperature) => {
   }
 };
 
-const weatherApi = async () => {
+const fetchWeatherData = async () => {
   try {
     const response =
       await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}
@@ -35,4 +35,4 @@ const weatherApi = async () => {
   }
 };
 
-export default weatherApi;
+export default fetchWeatherData;

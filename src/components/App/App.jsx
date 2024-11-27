@@ -6,7 +6,7 @@ import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import ItemModal from '../ItemModal/ItemModal';
 import Footer from '../Footer/Footer';
 import constants from '../../utils/constants';
-import weatherApi from '../../utils/weatherApi';
+import fetchWeatherData from '../../utils/weatherApi';
 
 function App() {
   const defaultClothingItems = constants.defaultClothingItems;
@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const getWeatherData = async () => {
-      const data = await weatherApi();
+      const data = await fetchWeatherData();
       setWeather(data);
     };
 
