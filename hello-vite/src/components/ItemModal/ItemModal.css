@@ -1,0 +1,46 @@
+.ItemModal{
+    background-color: rgba(0, 0, 0, 0.30);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.ItemModal__container{
+    height: 610px;
+    width: 498px;
+    background-color: white;
+    padding-left: 32px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    border: none;
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.ItemModal__close-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    position: absolute;
+    right: 28px;
+    top: 20px;
+    background: url('../../assets/close-btn.png') no-repeat center center/cover;
+    z-index: 2;
+}
+
+
+.ItemModal__image-container{
+overflow: hidden;
+height: 498px;
+}
+
+.ItemModal__image{
+    width: 100%;
+}
+

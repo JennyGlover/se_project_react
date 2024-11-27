@@ -1,4 +1,8 @@
 
+.Main{
+margin-left: 41px;
+margin-right: 41px;
+}
 .Main__weather-info{
     font-weight: bold;
     font-size: 20px;

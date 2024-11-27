@@ -1,12 +1,12 @@
 import './WeatherCard.css';
 import cloudy from "../../assets/cloudy.svg"
 
-function WeatherCard(){
+function WeatherCard({weatherData}){
 
     return(
-   <div className="WeatherCard">
+   <div className="WeatherCard" >
         <p className='WeatherCard__text'>75°F</p>
-        <img  className='WeatherCard__image'src={cloudy} alt="cloudy" />
+        <img  className='WeatherCard__image' src={cloudy} alt="cloudy" />
       </div>
     );
 }

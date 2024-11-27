@@ -1,8 +1,10 @@
 import './ItemCard.css';
-function ItemCard({data}){
+function ItemCard({data,handleCardClick}){
     
     return(
-      <div className="ItemCard" >
+      <div className="ItemCard"  onClick={() => {
+       handleCardClick();
+      }} >
         <p className="ItemCard__title">{data.name}</p>
        <img src={data.link} className='ItemCard__item' alt={data.name} />
       </div>

@@ -1,7 +1,9 @@
 .Header{
  display: flex;
  justify-content: space-between;
- 
+ margin-left: 41px;
+ margin-right: 41px;
+ padding-top: 32px;
 }
 
 .Header__page-info, .Header__user-info, .Header__menu{

@@ -1,0 +1,55 @@
+.ModalWithForm{
+    background-color: rgba(0, 0, 0, 0.30);
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    top: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.ModalWithForm__form{
+   height: 436px;
+   width: 436px;
+   background-color: white;
+   padding: 28px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   border-radius: 20px;
+   border: 1px solid rgba(0, 0, 0, 0.30);
+    position: relative;
+    font-size: 16px;
+   font-weight: bold;
+}
+.ModalWithForm__close-btn{
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border: none;
+    position: absolute;
+    right: 28px;
+    top: 20px;
+    background: url('../../assets/close-btn.png') no-repeat center center/cover; ;
+}
+
+.ModalWithForm__input{
+   margin-bottom: 24px;
+   border: none;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.50);
+   margin-top: 8px;
+  font-weight: bold;
+}
+
+.ModalWithForm__submit-button{
+ width: 124px;
+ height: 36px;
+ margin-top: 32px;
+ border-radius: 4px;
+ border: none;
+ font-weight: bold;
+ color: white;
+ background-color: rgba(0, 0, 0, 0.30) ;
+}
+

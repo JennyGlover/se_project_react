@@ -37,4 +37,10 @@ const defaultClothingItems = [
   }
 ]
 
-export default defaultClothingItems;
+const WeatherData = {
+  name: "hi",
+};
+
+
+export default  { defaultClothingItems, WeatherData };
+

@@ -2,7 +2,7 @@ import './Header.css';
 import logo from '../../assets/logo.png';
 import defaultAvatar from '../../assets/default-avatar.png'
 
-function Header(){
+function Header({handleAddButtonClick}){
     const currentDate = new Date().toLocaleString('default', {month: 'long', day: 'numeric'});
 
     return (
@@ -13,7 +13,9 @@ function Header(){
         </span>
         <span className='Header__user-info'>
         <span className='Header__menu'>
-        <button className="Header__button">+ Add clothes</button>
+        <button className="Header__button" onClick={()=>{
+                    handleAddButtonClick();
+                }}>+ Add clothes</button>
         <p className="Header__text">Terrence Tegegne</p>
         </span>
         <img src={defaultAvatar} className="Header__avatar" alt="User Profile"/>
