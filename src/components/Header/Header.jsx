@@ -9,7 +9,7 @@ function Header({ handleAddButtonClick, weather }) {
   });
 
   return (
-    <div className="Header">
+    <header className="Header">
       <span className="Header__page-info">
         <img src={logo} alt="App Logo" />
         <p className="Header__text">
@@ -34,7 +34,7 @@ function Header({ handleAddButtonClick, weather }) {
           alt="User Profile"
         />
       </span>
-    </div>
+    </header>
   );
 }
 

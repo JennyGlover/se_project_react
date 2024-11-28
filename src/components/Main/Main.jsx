@@ -4,7 +4,7 @@ import ItemCard from '../ItemCard/ItemCard';
 
 function Main({ defaultClothingItems, weather, handleCardClick }) {
   return (
-    <div className="Main">
+    <main className="Main">
       <WeatherCard weatherData={weather} />
       <p className="Main__weather-info">
         Today is {weather.temperature}°F you may want to wear:{' '}
@@ -25,7 +25,7 @@ function Main({ defaultClothingItems, weather, handleCardClick }) {
             ),
           )}
       </ul>
-    </div>
+    </main>
   );
 }
 

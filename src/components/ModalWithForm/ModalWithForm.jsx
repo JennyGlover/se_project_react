@@ -10,7 +10,7 @@ function ModalWithForm({
 }) {
   return (
     <div
-      className="ModalWithForm"
+      className={`ModalWithForm  ModalWithForm_type_${name}`}
       style={{ display: isFormModalVisible ? 'flex' : 'none' }}
     >
       <form
@@ -24,7 +24,7 @@ function ModalWithForm({
           onClick={() => {
             onClose();
           }}
-        ></button>
+        />
         {children}
         <button type="submit" className="ModalWithForm__submit-button">
           {buttonText}

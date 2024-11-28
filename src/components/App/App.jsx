@@ -17,8 +17,13 @@ function App() {
 
   useEffect(() => {
     const getWeatherData = async () => {
-      const data = await fetchWeatherData();
-      setWeather(data);
+      try {
+          const data = await fetchWeatherData();
+          setWeather(data);
+      } catch(error){
+        console.error("Failed to fetch weather data:", error);
+      }
+    
     };
 
     getWeatherData();

@@ -15,24 +15,16 @@ const describeWeather = (temperature) => {
 };
 
 const fetchWeatherData = async () => {
-  try {
-    const response =
-      await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}
-`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`);
     const data = await response.json();
     const cityName = data.name;
     const temperature = data.main.temp;
     const weatherType = describeWeather(temperature);
-
     return {
       cityName,
       temperature,
       weatherType,
     };
-  } catch (error) {
-    console.log('Error fetching weather data:', error);
-    return null;
-  }
 };
 
 export default fetchWeatherData;
