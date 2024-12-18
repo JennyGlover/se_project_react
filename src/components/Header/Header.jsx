@@ -1,6 +1,7 @@
 import './Header.css';
 import logo from '../../assets/logo.png';
 import defaultAvatar from '../../assets/default-avatar.png';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 
 function Header({ handleAddButtonClick, weather }) {
   const currentDate = new Date().toLocaleString('default', {
@@ -18,6 +19,7 @@ function Header({ handleAddButtonClick, weather }) {
       </span>
       <span className="Header__user-info">
         <span className="Header__menu">
+          <ToggleSwitch />
           <button
             className="Header__button"
             onClick={() => {
