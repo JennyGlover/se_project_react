@@ -7,7 +7,7 @@ function Main({ defaultClothingItems, weather, handleCardClick }) {
     <main className="Main">
       <WeatherCard weatherData={weather} />
       <p className="Main__weather-info">
-        Today is {weather.temperature}°F you may want to wear:{' '}
+        Today is {weather.temperatureFahrenheit}°F you may want to wear:{' '}
       </p>
       <ul className="Main__item-cards">
         {defaultClothingItems

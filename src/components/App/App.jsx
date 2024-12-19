@@ -7,6 +7,7 @@ import ItemModal from '../ItemModal/ItemModal';
 import Footer from '../Footer/Footer';
 import constants from '../../utils/constants';
 import fetchWeatherData from '../../utils/weatherApi';
+import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
 
 function App() {
   const defaultClothingItems = constants.defaultClothingItems;
@@ -14,20 +15,9 @@ function App() {
   const [isImageModalVisible, setIsImageModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
-  useEffect(() => {
-    const getWeatherData = async () => {
-      try {
-          const data = await fetchWeatherData();
-          setWeather(data);
-      } catch(error){
-        console.error("Failed to fetch weather data:", error);
-      }
-    
-    };
 
-    getWeatherData();
-  }, []);
 
   const handleCardClick = (item) => {
     setSelectedItem(item);
@@ -44,8 +34,28 @@ function App() {
     setSelectedItem(null);
   };
 
+  const handleToggleSwitchChange = ()=> {
+ if(currentTemperatureUnit === 'C') setCurrentTemperatureUnit('F')
+ if(currentTemperatureUnit === 'F') setCurrentTemperatureUnit('C')  
+  }
+
+    useEffect(() => {
+    const getWeatherData = async () => {
+      try {
+          const data = await fetchWeatherData();
+          setWeather(data);
+      } catch(error){
+        console.error("Failed to fetch weather data:", error);
+      }
+    
+    };
+
+    getWeatherData();
+  }, []);
+
   return (
     <div className="App">
+      <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}}>
       <ModalWithForm
         onClose={onClose}
         isFormModalVisible={isFormModalVisible}
@@ -123,6 +133,7 @@ function App() {
         onClose={onClose}
       />
       <Footer />
+      </CurrentTemperatureUnitContext.Provider>
     </div>
   );
 }
