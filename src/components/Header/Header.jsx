@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../assets/logo.png';
 import defaultAvatar from '../../assets/default-avatar.png';
@@ -12,7 +13,9 @@ function Header({ handleAddButtonClick, weather }) {
   return (
     <header className="Header">
       <span className="Header__page-info">
-        <img src={logo} alt="App Logo" />
+        <Link to="/" >
+        <img src={logo} alt="App Logo" />  
+        </Link>
         <p className="Header__text">
           {currentDate}, {weather.cityName}
         </p>
@@ -30,11 +33,13 @@ function Header({ handleAddButtonClick, weather }) {
           </button>
           <p className="Header__text">Terrence Tegegne</p>
         </span>
+        <Link to="/profile">
         <img
           src={defaultAvatar}
           className="Header__avatar"
           alt="User Profile"
         />
+        </Link>
       </span>
     </header>
   );

@@ -1,5 +1,6 @@
 import './App.css';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect} from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
@@ -128,17 +129,20 @@ function App() {
         handleAddButtonClick={handleAddButtonClick}
         weather={weather || {}}
       />
-      <Profile  defaultClothingItems={defaultClothingItems}
-              handleCardClick={handleCardClick}
-        handleAddButtonClick={handleAddButtonClick}
-
-/>
-      {/* <Main
+      <Routes>
+        <Route path="/" element={   <Main
         defaultClothingItems={defaultClothingItems}
         weather={weather || {}}
         handleCardClick={handleCardClick}
         onClose={onClose}
-      /> */}
+      />} />
+        <Route path="/profile" element={  <Profile  defaultClothingItems={defaultClothingItems}
+              handleCardClick={handleCardClick}
+        handleAddButtonClick={handleAddButtonClick}
+
+/>} />
+      </Routes>
+  
       <Footer />
       </CurrentTemperatureUnitContext.Provider>
     </div>

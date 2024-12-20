@@ -24,7 +24,6 @@ const fetchWeatherData = async () => {
     
     return {
       cityName,
-      temperature,
       fahrenheitTemp,
       celsiusTemp,
       weatherType,
