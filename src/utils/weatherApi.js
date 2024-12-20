@@ -18,14 +18,15 @@ const fetchWeatherData = async () => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`);
     const data = await response.json();
     const cityName = data.name;
-    const temperatureFahrenheit = data.main.temp;
-    const temperatureCelsius = Math.round((temperatureFahrenheit - 32) * 5/9)
-    const weatherType = describeWeather(temperatureFahrenheit);
+    const fahrenheitTemp = data.main.temp;
+    const celsiusTemp = Math.round((data.main.temp - 32) * 5/9);
+    const weatherType = describeWeather(fahrenheitTemp);
     
     return {
       cityName,
-      temperatureFahrenheit,
-      temperatureCelsius,
+      temperature,
+      fahrenheitTemp,
+      celsiusTemp,
       weatherType,
     };
 };

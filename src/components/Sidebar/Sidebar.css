@@ -1,0 +1,13 @@
+.Sidebar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+
+.Sidebar__username {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+

@@ -1,7 +1,8 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import Profile from '../Profile/Profile';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import ItemModal from '../ItemModal/ItemModal';
 import Footer from '../Footer/Footer';
@@ -35,9 +36,10 @@ function App() {
   };
 
   const handleToggleSwitchChange = ()=> {
- if(currentTemperatureUnit === 'C') setCurrentTemperatureUnit('F')
- if(currentTemperatureUnit === 'F') setCurrentTemperatureUnit('C')  
-  }
+ currentTemperatureUnit === 'C'
+ ? setCurrentTemperatureUnit('F')
+ : setCurrentTemperatureUnit('C')  
+  };
 
     useEffect(() => {
     const getWeatherData = async () => {
@@ -126,12 +128,17 @@ function App() {
         handleAddButtonClick={handleAddButtonClick}
         weather={weather || {}}
       />
-      <Main
+      <Profile  defaultClothingItems={defaultClothingItems}
+              handleCardClick={handleCardClick}
+        handleAddButtonClick={handleAddButtonClick}
+
+/>
+      {/* <Main
         defaultClothingItems={defaultClothingItems}
         weather={weather || {}}
         handleCardClick={handleCardClick}
         onClose={onClose}
-      />
+      /> */}
       <Footer />
       </CurrentTemperatureUnitContext.Provider>
     </div>
