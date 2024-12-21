@@ -20,7 +20,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCardClick = (item) => {
     setSelectedItem(item);
@@ -43,25 +43,25 @@ function App() {
  : setCurrentTemperatureUnit('C')  
   };
 
-// const onAddItem = (values) => {
-//   console.log(values)
-// }
-
 const handleAddItemSubmit = (item) =>{
+  setIsLoading(true);
    postItem(item)
     .then((newItem) => {
       setClothingItems([newItem, ...clothingItems]);
-    }).catch(console.error);
+      handleCloseModal();
+    }).catch(console.error)
+    .finally(() => {
+      setIsLoading(false);
+    });
 }
 
 const handleItemDelete = (id) => {
    deleteItem(id)
    .then(() => {
     setClothingItems((prevItems) => prevItems.filter(item => item._id !== id))
-    setIsImageModalVisible(false);
+    handleCloseModal();
    }).catch(console.error);
 }
-
 
     useEffect(() => {
     const getWeatherData = async () => {
@@ -91,7 +91,7 @@ const handleItemDelete = (id) => {
   return (
     <div className="App">
       <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}}>
-      <AddItemModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleAddItemSubmit={handleAddItemSubmit}/>
+      <AddItemModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleAddItemSubmit={handleAddItemSubmit} isLoading={isLoading}/>
       <ItemModal
        handleCloseModal={handleCloseModal}
         isImageModalVisible={isImageModalVisible}

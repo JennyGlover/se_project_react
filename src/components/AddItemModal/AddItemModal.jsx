@@ -1,30 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import './AddItemModal.css';
-function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit}) {
+import useForm from "../../hooks/useForm";
 
-    const [name, setName] = useState("");
-    const [link, setLink] = useState("");
-    const [weather, setWeather] = useState("");
-    const handleNameChange = (e) => {
-        setName(e.target.value)
-    }
-    const handleLinkChange = (e) =>{
-        setLink(e.target.value)
-    }
-
-    const handleWeatherTypeChange = (e) => {
-        setWeather(e.target.value)
-    }
+function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit, isLoading}) {
+    
+  const { values, handleChange, resetForm } = useForm({
+  name: "",
+  link: "",
+  weather: "",
+});
 
     const handleSubmit= (e) => {
         e.preventDefault();
-        setName('');
-       setLink('');
-       setWeather('');
-        handleAddItemSubmit({name, link, weather })
-        handleCloseModal();
+        handleAddItemSubmit(values);
     }
+
+  //Resetting the form values whenever the modal is closed
+    useEffect(() => {
+      if (!isFormModalVisible){
+        resetForm();
+      }
+    }, [isFormModalVisible]);
 
     return(
   <ModalWithForm
@@ -32,7 +29,7 @@ function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit
         isFormModalVisible={isFormModalVisible}
         onSubmit={handleSubmit}
         title="New garment"
-        buttonText="Add garment"
+        buttonText={isLoading? "Saving..." : "Add Garment "}
         name="add-garment"
       >
         <label htmlFor="mame" className="ModalWithForm__input-label">
@@ -45,8 +42,9 @@ function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit
           id="name"
           minLength="1"
           maxLength="30"
-          value={name}
-          onChange={handleNameChange}
+          name="name"
+          value={values.name}
+          onChange={handleChange}
         />
         <label htmlFor="image" className="ModalWithForm__input-label">
           Image
@@ -58,41 +56,47 @@ function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit
           id="image"
           name="link"
           minLength="1"
-          value={link}
-          onChange={handleLinkChange}
+          value={values.link}
+          onChange={handleChange}
         />
 
-        <fieldset className="ModalWithForm__radio-buttons" onChange={handleWeatherTypeChange}>
+        <fieldset className="ModalWithForm__radio-buttons" >
           <legend className="ModalWithForm__legend">
             Select the Weather type:
           </legend>
           <label className="ModalWithForm__radio" htmlFor="weather-hot">
             <input
               type="radio"
-              name="weatherType"
+              name="weather"
               value="hot"
               id="weather-hot"
               className="ModalWithForm__radio-input"
+              checked={values.weather === 'hot'}
+              onChange={handleChange}
             />
             <span>Hot</span>
           </label>
           <label className="ModalWithForm__radio" htmlFor="weather-warm">
             <input
               type="radio"
-              name="weatherType"
+              name="weather"
               value="warm"
               id="weather-warm"
               className="ModalWithForm__radio-input"
+              checked={values.weather === 'warm'}
+              onChange={handleChange}
             />
             <span>Warm</span>
           </label>
           <label className="ModalWithForm__radio" htmlFor="weather-cold">
             <input
               type="radio"
-              name="weatherType"
+              name="weather"
               value="cold"
               id="weather-cold"
               className="ModalWithForm__radio-input"
+              checked={values.weather === 'cold'}
+              onChange={handleChange}
             />
             <span>Cold</span>
           </label>
