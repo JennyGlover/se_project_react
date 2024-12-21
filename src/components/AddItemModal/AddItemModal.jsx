@@ -5,7 +5,7 @@ function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit
 
     const [name, setName] = useState("");
     const [link, setLink] = useState("");
-    const [weatherType, setWeatherType] = useState("");
+    const [weather, setWeather] = useState("");
     const handleNameChange = (e) => {
         setName(e.target.value)
     }
@@ -14,12 +14,16 @@ function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit
     }
 
     const handleWeatherTypeChange = (e) => {
-        setWeatherType(e.target.value)
+        setWeather(e.target.value)
     }
 
     const handleSubmit= (e) => {
         e.preventDefault();
-        handleAddItemSubmit({name, link, weatherType })
+        setName('');
+       setLink('');
+       setWeather('');
+        handleAddItemSubmit({name, link, weather })
+        handleCloseModal();
     }
 
     return(

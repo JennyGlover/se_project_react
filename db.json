@@ -1,16 +1,88 @@
 {
   "items": [
     {
-      "_id": 4,
-      "name": "T-Shirt",
-      "weather": "hot",
-      "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
+      "name": "Sun hat",
+      "link": "https://static.vecteezy.com/system/resources/previews/040/443/802/non_2x/ai-generated-sun-hat-isolated-on-transparent-background-free-png.png",
+      "weather": "warm",
+      "_id": 6
     },
     {
-      "_id": 5,
-      "name": "Coat",
+      "name": "knitted sweater",
+      "link": "https://png.pngtree.com/png-vector/20230912/ourmid/pngtree-green-winter-sweater-png-image_10022526.png",
       "weather": "cold",
-      "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4"
+      "_id": 7
+    },
+    {
+      "name": "UGG Boots",
+      "link": "https://www.pngplay.com/wp-content/uploads/12/Ugg-Download-Free-PNG.png",
+      "weather": "cold",
+      "_id": 9
+    },
+    {
+      "name": "Sundress",
+      "link": "https://static.vecteezy.com/system/resources/previews/051/597/311/non_2x/a-floral-dress-on-transparent-background-free-png.png",
+      "weather": "hot",
+      "_id": 10
+    },
+    {
+      "name": "Tank top",
+      "link": "https://mockupmark.com/api/templates/flatlay-18-thumb.png",
+      "weather": "hot",
+      "_id": 11
+    },
+    {
+      "name": "Cargo Shorts",
+      "link": "https://static.vecteezy.com/system/resources/thumbnails/037/068/096/small_2x/ai-generated-cargo-shorts-on-transparent-background-png.png",
+      "weather": "warm",
+      "_id": 13
+    },
+    {
+      "name": "Joggers",
+      "link": "https://www.pngarts.com/files/3/Jogger-Pant-PNG-Image-With-Transparent-Background.png",
+      "weather": "cold",
+      "_id": 14
+    },
+    {
+      "name": "Hoodie",
+      "link": "https://pngimg.com/uploads/hoodie/hoodie_PNG24.png",
+      "weather": "cold",
+      "_id": 15
+    },
+    {
+      "name": "Sandals",
+      "link": "https://static.vecteezy.com/system/resources/previews/048/719/093/non_2x/men-s-sandals-on-transparent-background-free-png.png",
+      "weather": "hot",
+      "_id": 16
+    },
+    {
+      "name": "Sneakers",
+      "link": "https://static.vecteezy.com/system/resources/previews/048/415/596/non_2x/white-sneaker-with-light-blue-accents-over-transparent-background-free-png.png",
+      "weather": "cold",
+      "_id": 17
+    },
+    {
+      "name": "Jacket",
+      "link": "https://static.vecteezy.com/system/resources/previews/035/224/846/non_2x/ai-generated-women-s-down-jacket-beige-isolated-on-transparent-background-free-png.png",
+      "weather": "cold",
+      "_id": 19
+    },
+    {
+      "name": "Flats",
+      "link": "https://static.vecteezy.com/system/resources/thumbnails/021/491/769/small/beige-high-heels-isolated-on-a-transparent-background-png.png",
+      "weather": "hot",
+      "_id": 20
+    },
+    {
+      "name": "Mittens",
+      "link": "https://png.pngtree.com/png-vector/20240328/ourmid/pngtree-pair-of-knitted-winter-mittens-png-image_12237822.png",
+      "weather": "cold",
+      "_id": 21
+    },
+    {
+      "name": "Knitted Hat",
+      "link": "https://freepngimg.com/download/hat/150628-knitted-hat-winter-png-image-high-quality.png",
+      "weather": "cold",
+      "_id": 22
     }
   ],
   "posts": [

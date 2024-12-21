@@ -8,7 +8,8 @@ function ItemCard({ data, handleCardClick }) {
       }}
     >
       <p className="ItemCard__title">{data.name}</p>
-      <img src={data.link} className="ItemCard__item" alt={data.name} />
+      <div><img src={data.link} className="ItemCard__item" alt={data.name} /></div>
+      
     </div>
   );
 }

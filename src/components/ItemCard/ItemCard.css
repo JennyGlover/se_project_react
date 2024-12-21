@@ -19,6 +19,13 @@
   border-radius: 4px;
 }
 
-.ItemCard__item {
+.ItemCard__item-container {
   width: 230px;
+  height: 230px;
+}
+
+.ItemCard__item {
+  width: fit-content;
+  height: 230px;
+  /* max-height: fit-content; */
 }
