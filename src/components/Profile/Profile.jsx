@@ -3,12 +3,12 @@ import Sidebar from '../Sidebar/Sidebar';
 import ClothesSection from '../ClothesSection/ClothesSection';
 
 
-function Profile({defaultClothingItems, handleCardClick, handleAddButtonClick }){
+function Profile({clothingItems, handleCardClick, handleAddButtonClick }){
 
     return (
         <div className='Profile'>
         <Sidebar />
-        <ClothesSection  defaultClothingItems={defaultClothingItems} handleCardClick={handleCardClick} handleAddButtonClick={handleAddButtonClick}/>
+        <ClothesSection  clothingItems={clothingItems} handleCardClick={handleCardClick} handleAddButtonClick={handleAddButtonClick} />
         </div>
     )
     

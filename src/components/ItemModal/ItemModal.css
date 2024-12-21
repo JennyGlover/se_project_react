@@ -17,7 +17,7 @@
   border-radius: 16px;
   border: none;
   position: relative;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   overflow: hidden;
   cursor: pointer;
@@ -43,8 +43,27 @@
 .ItemModal__image {
   width: 100%;
 }
-
+.ItemModal__item-name{
+  margin-bottom: 0;
+}
 .ItemModal__item-name,
 .ItemModal__weather-type {
   padding-left: 32px;
+}
+.ItemModal__flex-span{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 37px;
+  margin-bottom: 0px;
+  
+}
+
+.ItemModal__delete-btn{
+  border: none;
+  background-color: white;
+  color: #FF4D00;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
 }

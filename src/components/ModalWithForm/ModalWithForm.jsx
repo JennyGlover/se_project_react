@@ -1,8 +1,9 @@
 import './ModalWithForm.css';
 
 function ModalWithForm({
-  onClose,
+  handleCloseModal,
   isFormModalVisible,
+  onSubmit,
   children,
   title,
   buttonText,
@@ -14,15 +15,15 @@ function ModalWithForm({
       style={{ display: isFormModalVisible ? 'flex' : 'none' }}
     >
       <form
-        action=""
         className={`ModalWithForm__form ModalWithForm__form_type_${name}`}
+        onSubmit={onSubmit}
       >
         <p className="ModalWithForm__form-title">{title}</p>
         <button
           type="button"
           className="ModalWithForm__close-btn"
           onClick={() => {
-            onClose();
+            handleCloseModal();
           }}
         />
         {children}
