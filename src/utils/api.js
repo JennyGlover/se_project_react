@@ -13,21 +13,24 @@ function getItems() {
     return request(`${baseUrl}/items`);
 }
 
-function postItem(item) {
+function postItem(token, item) {
     return request(`${baseUrl}/items`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(item)
     });
 }
 
-function deleteItem(id) {
+function deleteItem(token, id) {
     return request(`${baseUrl}/items/${id}`, {
         method: "DELETE",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+
         }
     });
 }

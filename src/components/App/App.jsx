@@ -9,11 +9,12 @@ import AddItemModal from '../AddItemModal/AddItemModal';
 import LoginModal from '../LoginModal/LoginModal';
 import Footer from '../Footer/Footer';
 import fetchWeatherData from '../../utils/weatherApi';
-import { CurrentTemperatureUnitContext, AuthenticationContext } from '../../contexts/AppContexts';
-import { deleteItem, getItems, postItem } from '../../utils/api';
+import { CurrentTemperatureUnitContext, AuthenticationContext, CurrentUserContext } from '../../contexts/AppContexts';
+import * as api from '../../utils/api';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import ProtectedRoute from '../ProtectedRoute';
-import { signin, signup } from '../../utils/auth';
+import * as auth from '../../utils/auth';
+import { setToken, getToken } from '../../utils/token';
 
 function App() {
   const [isFormModalVisible, setIsFormModalVisible] = useState(false);
@@ -25,7 +26,8 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const [currentUser, setCurrentUser] = useState("");
+  const jwt = getToken();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -51,8 +53,13 @@ function App() {
   };
 
 const handleAddItemSubmit = (item) =>{
+   if (!jwt) {
+    return;
+  }
+  
   setIsLoading(true);
-   postItem(item)
+  api
+    .postItem(jwt, item)
     .then((newItem) => {
       setClothingItems([newItem, ...clothingItems]);
       handleCloseModal();
@@ -66,9 +73,34 @@ const handleLogin = ({
   email,
   password,
 }) => {
+  auth
+  .signin(email, password)
+  .then((data) => {
+    setToken(data.jwt);
+    setIsLoading(true);
+    setIsLoggedIn(true);
 
-  setIsLoading(true);
+  //redirecting users to the original desired route
+  const redirectPath = location.state?.from?.pathname || "/";
+  navigate(redirectPath);
+  
+  });
 };
+
+useEffect(() => {
+  if (!jwt) {
+    return;
+  }
+
+  auth
+   .getUserInfo(jwt)
+   .then(() => {
+    setIsLoggedIn(true);
+   })
+   .catch(console.error);
+
+}, []);
+
 
 const handleRegistration = ({
   email,
@@ -88,8 +120,14 @@ const handleRegistration = ({
 };
 
 
+
+
 const handleItemDelete = (id) => {
-   deleteItem(id)
+     if (!jwt) {
+    return;
+  }
+  api
+   .deleteItem(jwt, id)
    .then(() => {
     setClothingItems((prevItems) => prevItems.filter(item => item._id !== id))
     handleCloseModal();
@@ -111,7 +149,8 @@ const handleItemDelete = (id) => {
   }, []);
 
     useEffect(() => {
-      getItems()
+      api
+      .getItems()
        .then((data) =>{
       const filteredData = data.filter((item) => item.name && item.link); // Validate data
       setClothingItems(filteredData);
@@ -125,6 +164,7 @@ const handleItemDelete = (id) => {
   return (
     <div className="App">
       <AuthenticationContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <CurrentUserContext.Provider value={currentUser}>
       <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}}>
       <AddItemModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleAddItemSubmit={handleAddItemSubmit} isLoading={isLoading}/>
       <LoginModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleLogin={handleLogin} isLoading={isLoading}/>
@@ -163,6 +203,7 @@ const handleItemDelete = (id) => {
   
       <Footer />
       </CurrentTemperatureUnitContext.Provider>
+      </CurrentUserContext.Provider>
       </AuthenticationContext.Provider>
     </div>
   );

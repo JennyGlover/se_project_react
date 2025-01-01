@@ -9,4 +9,6 @@ const CurrentTemperatureUnitContext = React.createContext({
 
 const AuthenticationContext = React.createContext();
 
-export { CurrentTemperatureUnitContext, AuthenticationContext };
+const CurrentUserContext = React.createContext();
+
+export { CurrentTemperatureUnitContext, AuthenticationContext, CurrentUserContext };
