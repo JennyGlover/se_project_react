@@ -1,26 +1,33 @@
 import './App.css';
 import { useState, useEffect} from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate, useLocation} from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
-import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import ItemModal from '../ItemModal/ItemModal';
 import AddItemModal from '../AddItemModal/AddItemModal';
+import LoginModal from '../LoginModal/LoginModal';
 import Footer from '../Footer/Footer';
-import constants from '../../utils/constants';
 import fetchWeatherData from '../../utils/weatherApi';
-import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
+import { CurrentTemperatureUnitContext, AuthenticationContext } from '../../contexts/AppContexts';
 import { deleteItem, getItems, postItem } from '../../utils/api';
+import RegisterModal from '../RegisterModal/RegisterModal';
+import ProtectedRoute from '../ProtectedRoute';
+import { signin, signup } from '../../utils/auth';
 
 function App() {
   const [isFormModalVisible, setIsFormModalVisible] = useState(false);
   const [isImageModalVisible, setIsImageModalVisible] = useState(false);
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
   const [weather, setWeather] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleCardClick = (item) => {
     setSelectedItem(item);
@@ -38,9 +45,9 @@ function App() {
   };
 
   const handleToggleSwitchChange = ()=> {
- currentTemperatureUnit === 'C'
- ? setCurrentTemperatureUnit('F')
- : setCurrentTemperatureUnit('C')  
+ currentTemperatureUnit === 'F'
+ ? setCurrentTemperatureUnit('C')
+ : setCurrentTemperatureUnit('F')  
   };
 
 const handleAddItemSubmit = (item) =>{
@@ -53,7 +60,33 @@ const handleAddItemSubmit = (item) =>{
     .finally(() => {
       setIsLoading(false);
     });
-}
+};
+
+const handleLogin = ({
+  email,
+  password,
+}) => {
+
+  setIsLoading(true);
+};
+
+const handleRegistration = ({
+  email,
+  password,
+  name,
+  avatar,
+}) =>{
+
+  auth
+    .signup(email, password, name, avatar)
+    .then(() =>{
+      //Navigate to login
+      navigate("/signup")
+    })
+    .catch(console.error);
+  setIsLoading(true);
+};
+
 
 const handleItemDelete = (id) => {
    deleteItem(id)
@@ -61,7 +94,7 @@ const handleItemDelete = (id) => {
     setClothingItems((prevItems) => prevItems.filter(item => item._id !== id))
     handleCloseModal();
    }).catch(console.error);
-}
+};
 
     useEffect(() => {
     const getWeatherData = async () => {
@@ -70,7 +103,7 @@ const handleItemDelete = (id) => {
           setWeather(data);
       } catch(error){
         console.error("Failed to fetch weather data:", error);
-      }
+      };
     
     };
 
@@ -88,10 +121,14 @@ const handleItemDelete = (id) => {
 
 
 
+
   return (
     <div className="App">
+      <AuthenticationContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}}>
       <AddItemModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleAddItemSubmit={handleAddItemSubmit} isLoading={isLoading}/>
+      <LoginModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleLogin={handleLogin} isLoading={isLoading}/>
+      <RegisterModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleRegistration={handleRegistration} isLoading={isLoading}/>
       <ItemModal
        handleCloseModal={handleCloseModal}
         isImageModalVisible={isImageModalVisible}
@@ -103,22 +140,30 @@ const handleItemDelete = (id) => {
         weather={weather || {}}
       />
       <Routes>
-        <Route path="/" element={   <Main
+        <Route path="/" element={ 
+        <ProtectedRoute>
+        <Main
         clothingItems={clothingItems}
         weather={weather || {}}
         handleCardClick={handleCardClick}
         handleCloseModal={handleCloseModal}
-      />} />
-        <Route path="/profile" element={  <Profile  clothingItems={clothingItems}
+      />
+      </ProtectedRoute>
+    } />
+        <Route path="/profile" element={
+         <ProtectedRoute>
+          <Profile  clothingItems={clothingItems}
               handleCardClick={handleCardClick}
         handleAddButtonClick={handleAddButtonClick}
-
-
-/>} />
+    />       
+      </ProtectedRoute>
+} />
+      
       </Routes>
   
       <Footer />
       </CurrentTemperatureUnitContext.Provider>
+      </AuthenticationContext.Provider>
     </div>
   );
 }

@@ -47,22 +47,25 @@
   width: 80%;
   max-height: fit-content;
 }
-.ItemModal__item-name{
+
+.ItemModal__item-name {
   margin-bottom: 0;
 }
+
 .ItemModal__item-name,
 .ItemModal__weather-type {
   padding-left: 32px;
 }
-.ItemModal__flex-span{
+
+.ItemModal__flex-span {
   display: flex;
   justify-content: space-between;
   margin-right: 37px;
   margin-bottom: 0px;
-  
+
 }
 
-.ItemModal__delete-btn{
+.ItemModal__delete-btn {
   border: none;
   background-color: white;
   color: #FF4D00;

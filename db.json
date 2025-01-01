@@ -90,102 +90,7 @@
       "weather": "cold",
       "_id": 23
     },
-    {
-      "": "Chichén Itzá, Mexico",
-      "link": "https://cdn-bmalj.nitrocdn.com/uirOOtSrYrqqUksKHkiSCjZGZlPeXsmk/assets/images/optimized/rev-c3635d7/images/Things-to-Do-Churchill-Manitoba-Northern-Lights.jpg",
-      "weatherType": "warm",
-      "_id": 24
-    },
-    {
-      "": "Chichén Itzá, Mexico",
-      "link": "https://cdn-bmalj.nitrocdn.com/uirOOtSrYrqqUksKHkiSCjZGZlPeXsmk/assets/images/optimized/rev-c3635d7/images/Things-to-Do-Churchill-Manitoba-Northern-Lights.jpg",
-      "weatherType": "warm",
-      "_id": 25
-    },
-    {
-      "": "Chichén Itzá, Mexico",
-      "link": "https://cdn-bmalj.nitrocdn.com/uirOOtSrYrqqUksKHkiSCjZGZlPeXsmk/assets/images/optimized/rev-c3635d7/images/Things-to-Do-Churchill-Manitoba-Northern-Lights.jpg",
-      "weatherType": "warm",
-      "_id": 26
-    },
-    {
-      "": "Chichén Itzá, Mexico",
-      "link": "https://cdn-bmalj.nitrocdn.com/uirOOtSrYrqqUksKHkiSCjZGZlPeXsmk/assets/images/optimized/rev-c3635d7/images/Things-to-Do-Churchill-Manitoba-Northern-Lights.jpg",
-      "weatherType": "warm",
-      "_id": 27
-    },
-    {
-      "": "Jenny Saunders",
-      "link": "https://cdn.thecollector.com/wp-content/uploads/2021/12/great-wall-china-national-geographic.jpg?width=1400&quality=55",
-      "weatherType": "warm",
-      "_id": 28
-    },
-    {
-      "": "Jenny Saunders",
-      "link": "https://cdn.thecollector.com/wp-content/uploads/2021/12/great-wall-china-national-geographic.jpg?width=1400&quality=55",
-      "weatherType": "warm",
-      "_id": 29
-    },
-    {
-      "": "Jenny Saunders",
-      "link": "https://cdn.thecollector.com/wp-content/uploads/2021/12/great-wall-china-national-geographic.jpg?width=1400&quality=55",
-      "weatherType": "warm",
-      "_id": 30
-    },
-    {
-      "": "Jenny Saunders",
-      "link": "https://cdn.thecollector.com/wp-content/uploads/2021/12/great-wall-china-national-geographic.jpg?width=1400&quality=55",
-      "weatherType": "warm",
-      "_id": 31
-    },
-    {
-      "name": "",
-      "link": "https://cdn.thecollector.com/wp-content/uploads/2021/12/great-wall-china-national-geographic.jpg?width=1400&quality=55",
-      "weather": "",
-      "": "Jenny Saunders",
-      "weatherType": "warm",
-      "_id": 32
-    },
-    {
-      "name": "",
-      "link": "https://cdn-bmalj.nitrocdn.com/uirOOtSrYrqqUksKHkiSCjZGZlPeXsmk/assets/images/optimized/rev-c3635d7/images/Things-to-Do-Churchill-Manitoba-Northern-Lights.jpg",
-      "weather": "",
-      "": "Jenny Glover Saunders",
-      "weatherType": "warm",
-      "_id": 33
-    },
-    {
-      "name": "",
-      "link": "https://images.pexels.com/photos/12772395/pexels-photo-12772395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "weather": "",
-      "": "Jenny Glover Saunders",
-      "weatherType": "warm",
-      "_id": 34
-    },
-    {
-      "name": "",
-      "link": "https://images.pexels.com/photos/12772395/pexels-photo-12772395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "weather": "",
-      "": "Jenny Glover Saunders",
-      "weatherType": "warm",
-      "_id": 35
-    },
-    {
-      "name": "",
-      "link": "https://cdn.thecollector.com/wp-content/uploads/2021/12/great-wall-china-national-geographic.jpg?width=1400&quality=55",
-      "weather": "",
-      "": "Jenny Glover Saunders",
-      "weatherType": "hot",
-      "_id": 36
-    },
-    {
-      "name": "",
-      "link": "https://cdn.thecollector.com/wp-content/uploads/2021/12/great-wall-china-national-geographic.jpg?width=1400&quality=55",
-      "weather": "warm",
-      "": "Jenny Glover Saunders",
-      "weatherType": "hot",
-      "_id": 37
-    },
+
     {
       "name": "Sunscreen",
       "link": "https://static.vecteezy.com/system/resources/thumbnails/025/230/146/small_2x/sunscreen-or-sunblock-cream-tube-isolated-on-transparent-background-free-png.png",
@@ -216,11 +121,12 @@
       "weather": "cold",
       "_id": 43
     },
+    
     {
-      "name": "",
-      "link": "https://images.pexels.com/photos/12772395/pexels-photo-12772395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "weather": "",
-      "_id": 47
+      "name": "Scarf",
+      "link": "https://www.pngall.com/wp-content/uploads/2018/03/Scarf-PNG-HD.png",
+      "weather": "cold",
+      "_id": 48
     }
   ],
   "posts": [

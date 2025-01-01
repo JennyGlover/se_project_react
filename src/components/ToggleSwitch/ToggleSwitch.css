@@ -1,11 +1,10 @@
-.ToggleSwitch{
-     display: flex;
-     position: relative;
+.ToggleSwitch {
+    display: flex;
+    position: relative;
 
 }
 
-
-.ToggleSwitch__box{
+.ToggleSwitch__box {
     border-radius: 25px;
     width: 56px;
     height: 28px;
@@ -13,7 +12,7 @@
     appearance: none;
 }
 
-.ToggleSwitch__slider{
+.ToggleSwitch__slider {
     border-radius: 20px;
     width: 30px;
     height: 28px;
@@ -24,28 +23,31 @@
     position: absolute;
 }
 
-.ToggleSwitch__slider-F{
+.ToggleSwitch__slider-F {
     top: 0px;
     left: 24px;
 }
 
-.ToggleSwitch__slider-C{
+.ToggleSwitch__slider-C {
     top: 0px;
     left: 1px;
 }
-.ToggleSwitch__temp-F{
+
+.ToggleSwitch__temp-F {
     position: absolute;
     top: -10px;
     left: 10px;
     color: rgb(255, 255, 255);
 }
+
 .ToggleSwitch__temp-C {
     position: absolute;
     top: -10px;
     right: 10px;
     color: rgb(255, 255, 255);
 }
-.ToggleSwitch__acive{
+
+.ToggleSwitch__active {
     color: rgb(255, 255, 255);
     size: 16px;
 }

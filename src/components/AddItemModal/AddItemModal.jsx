@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import './AddItemModal.css';
 import useForm from "../../hooks/useForm";
@@ -32,7 +32,7 @@ function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit
         buttonText={isLoading? "Saving..." : "Add Garment "}
         name="add-garment"
       >
-        <label htmlFor="mame" className="ModalWithForm__input-label">
+        <label htmlFor="name" className="ModalWithForm__input-label">
           Name
         </label>
         <input

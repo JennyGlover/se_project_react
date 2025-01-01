@@ -1,21 +1,22 @@
-import {useState } from "react";
+import { useState } from "react";
 
 
-function useForm(initialValues){
+function useForm(initialValues) {
     const [values, setValues] = useState(initialValues);
 
     const handleChange = (e) => {
-    // get the name and value of the input because event.target is the input
-        const {value, name} = e.target;
-    // set the value into the object using the name
-        setValues({...values, [name]: value});
+        // getting the name and value of the input because event.target is the input
+        const { value, name } = e.target;
+        // setting the value into the object using the name
+        setValues({ ...values, [name]: value });
     };
 
+    //resetting form values
     const resetForm = () => {
-    setValues(initialValues);  
-  };
+        setValues(initialValues);
+    };
 
-    return {values, handleChange, resetForm};
+    return { values, handleChange, resetForm };
 }
 
 
