@@ -20,9 +20,7 @@
   color: rgba(0, 0, 0, 0.6);
   padding: 2px 12px;
   border-radius: 4px;
-  position: absolute;
-  margin-top: 15px;
-  top: 0px;
+
 }
 
 .ItemCard__item-container {
@@ -38,4 +36,32 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.ItemCard__top-content {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  top: 0px;
+}
+
+.ItemCard__unlikedHeart {
+  background-image: url('/src/assets/unliked-heart.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 19px;
+  width: 16px;
+
+}
+
+.ItemCard__likedHeart {
+  background-image: url('/src/assets/liked-heart.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 19px;
+  width: 16px;
 }

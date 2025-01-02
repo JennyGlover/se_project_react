@@ -33,9 +33,10 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleCardClick = (item) => {
+  const handleCardClick = (item, e) => {
     setSelectedItem(item);
     setIsImageModalVisible((prevState) => !prevState);
+    e.stopPropagation();
   };
 
   const handleAddButtonClick = () => {
@@ -89,6 +90,36 @@ const handleAddItemSubmit = (item) =>{
       setIsLoading(false);
     });
 };
+const handleCardLike = (data) => {
+  
+  const { _id , likes} = data;
+  console.log(data.likes)
+ 
+  const jwt = getToken();
+  if (!jwt) {
+    return;
+  }
+  // Check if this card is not currently liked
+ !likes
+ ? // if so, send a request to add the user's id to the card's likes array
+ api
+   .addCardLike(jwt, _id)
+   .then((res) => {
+    setClothingItems((cards) =>
+      cards.map((item) => item._id === _id ? res.data : item
+  ))
+   })
+  .catch(console.error)
+ :
+ api
+  .removeCardLike(jwt, _id)
+  .then((res) => {
+    setClothingItems((cards) => 
+       cards.map((item) => item._id === _id ? res.data : item )
+    )
+  })
+  .catch(console.error);
+}
 
 const handleRegistration = ({
   email,
@@ -194,7 +225,8 @@ const handleItemDelete = (id) => {
       .getItems()
        .then((items) =>{
       
-        let clothingItems = items.data
+      let clothingItems = items.data
+      console.log(clothingItems);
       const filteredData = clothingItems.filter((item) => item.name && item.imageUrl); 
       // Validate data
       setClothingItems(filteredData);
@@ -235,6 +267,7 @@ const handleItemDelete = (id) => {
         weather={weather || {}}
         handleCardClick={handleCardClick}
         handleCloseModal={handleCloseModal}
+        onCardLike={handleCardLike}
       />
       </ProtectedRoute>
     } />
