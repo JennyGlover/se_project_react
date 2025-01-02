@@ -3,30 +3,31 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import './AddItemModal.css';
 import useForm from "../../hooks/useForm";
 
-function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit, isLoading}) {
+function AddItemModal({isAddItemModalVisible, handleCloseModal, handleAddItemSubmit, isLoading}) {
     
   const { values, handleChange, resetForm } = useForm({
   name: "",
-  link: "",
+  imageUrl: "",
   weather: "",
 });
 
     const handleSubmit= (e) => {
         e.preventDefault();
         handleAddItemSubmit(values);
+        console.log(values);
     }
 
   //Resetting the form values whenever the modal is closed
     useEffect(() => {
-      if (!isFormModalVisible){
+      if (!isAddItemModalVisible){
         resetForm();
       }
-    }, [isFormModalVisible]);
+    }, [isAddItemModalVisible]);
 
     return(
   <ModalWithForm
         handleCloseModal={handleCloseModal}
-        isFormModalVisible={isFormModalVisible}
+        isFormModalVisible={isAddItemModalVisible}
         onSubmit={handleSubmit}
         title="New garment"
         buttonText={isLoading? "Saving..." : "Add Garment "}
@@ -46,17 +47,17 @@ function AddItemModal({isFormModalVisible, handleCloseModal, handleAddItemSubmit
           value={values.name}
           onChange={handleChange}
         />
-        <label htmlFor="image" className="ModalWithForm__input-label">
+        <label htmlFor="imageUrl" className="ModalWithForm__input-label">
           Image
         </label>
         <input
           type="url"
           className="ModalWithForm__input"
           placeholder="Image URL"
-          id="image"
-          name="link"
+          id="imageUrl"
+          name="imageUrl"
           minLength="1"
-          value={values.link}
+          value={values.imageUrl}
           onChange={handleChange}
         />
 

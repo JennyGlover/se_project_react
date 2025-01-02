@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3002';
+const baseUrl = 'http://localhost:3001';
 
 export function checkResponse(res) {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
@@ -24,6 +24,18 @@ function postItem(token, item) {
     });
 }
 
+function updateUserProfile(token, item) {
+    return request(`${baseUrl}/users/me`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+
+        body: JSON.stringify(item)
+    });
+}
+
 function deleteItem(token, id) {
     return request(`${baseUrl}/items/${id}`, {
         method: "DELETE",
@@ -36,4 +48,4 @@ function deleteItem(token, id) {
 }
 
 
-export { getItems, postItem, deleteItem };
+export { getItems, postItem, deleteItem, updateUserProfile };

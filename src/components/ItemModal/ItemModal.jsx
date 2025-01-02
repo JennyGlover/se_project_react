@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import './ItemModal.css';
-import shirt from '../../assets/shirt.png';
+import { CurrentUserContext } from '../../contexts/AppContexts';
 
 function ItemModal({ handleCloseModal, isImageModalVisible, data, handleItemDelete}) {
+
+const { currentUser }  = useContext(CurrentUserContext);
+
+// Checking if the current user is the owner of the current clothing item
+const isOwn = data?.owner._id === currentUser._id;
+
+// Creating a variable which then set in `className` for the delete button
+
   return (
     <div
       className="ItemModal"
@@ -9,10 +18,11 @@ function ItemModal({ handleCloseModal, isImageModalVisible, data, handleItemDele
     >
       <div className="ItemModal__container">
         <div className="ItemModal__image-container">
-          <img src={data?.link} alt={data?.name} className="ItemModal__image" />
+          <img src={data?.imageUrl} alt={data?.name} className="ItemModal__image" />
         </div>
-        <span className='ItemModal__flex-span'><p className="ItemModal__item-name">{data?.name}</p> <button className='ItemModal__delete-btn' onClick={() => handleItemDelete(data?._id)}> Delete item</button></span>
+        <span className='ItemModal__flex-span'><p className="ItemModal__item-name">{data?.name}</p> { isOwn && (<button className='ItemModal__delete-btn' onClick={() => handleItemDelete(data?._id)}> Delete item</button>) } </span>
         <p className="ItemModal__weather-type">Weather: {data?.weather}</p>
+    
         <button
           type="button"
           className="ItemModal__close-btn"

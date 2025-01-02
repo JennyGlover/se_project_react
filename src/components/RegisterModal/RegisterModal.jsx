@@ -3,7 +3,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css"
 import useForm from "../../hooks/useForm";
 
-function RegisterModal({isFormModalVisible, handleCloseModal, handleRegistration, isLoading}) {
+function RegisterModal({isSignupModalVisible, handleCloseModal, handleRegistration, isLoading, setIsLoginModalVisible}) {
     
   const { values, handleChange, resetForm } = useForm({
   email: "",
@@ -19,17 +19,17 @@ function RegisterModal({isFormModalVisible, handleCloseModal, handleRegistration
 
   //Resetting the form values whenever the modal is closed
     useEffect(() => {
-      if (!isFormModalVisible){
+      if (!isSignupModalVisible){
         resetForm();
       }
-    }, [isFormModalVisible]);
+    }, [isSignupModalVisible]);
 
     return(
   <ModalWithForm
         handleCloseModal={handleCloseModal}
-        isFormModalVisible={isFormModalVisible}
+        isFormModalVisible={isSignupModalVisible}
         onSubmit={handleSubmit}
-        title="Log in"
+        title="Sign Up"
         buttonText={isLoading? "Loading..." : "Next"}
         name="log-in"
       >
@@ -69,12 +69,12 @@ function RegisterModal({isFormModalVisible, handleCloseModal, handleRegistration
         <input
           type="text"
           className="ModalWithForm__input"
-          placeholder="Password"
+          placeholder="Name"
           id="username"
-          name="password"
+          name="name"
           minLength="8"
           maxLength="30"
-          value={values.password}
+          value={values.name}
           onChange={handleChange}
         />
 
@@ -90,6 +90,10 @@ function RegisterModal({isFormModalVisible, handleCloseModal, handleRegistration
           value={values.avatar}
           onChange={handleChange}
         />
+         <p className="Register__signup-link" onClick={() =>{
+          handleCloseModal();
+          setIsLoginModalVisible(true)
+        }}>or Login</p>
       </ModalWithForm>
     )
 }

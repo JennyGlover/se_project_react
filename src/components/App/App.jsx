@@ -15,19 +15,21 @@ import RegisterModal from '../RegisterModal/RegisterModal';
 import ProtectedRoute from '../ProtectedRoute';
 import * as auth from '../../utils/auth';
 import { setToken, getToken } from '../../utils/token';
+import EditProfileModal from '../EditProfileModal/EditProfileModal';
 
 function App() {
-  const [isFormModalVisible, setIsFormModalVisible] = useState(false);
+  const [isAddItemModalVisible, setIsAddItemModalVisible] = useState(false);
   const [isImageModalVisible, setIsImageModalVisible] = useState(false);
-  const [isLoginModalVisible, setIsLoginModalVisible] = useState(true);
+  const [isSignupModalVisible, setIsSignupModalVisible] = useState(false);
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+  const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [weather, setWeather] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState("");
-  const jwt = getToken();
+  const [currentUser, setCurrentUser] = useState({ name:"", avatar: "" });
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -37,12 +39,28 @@ function App() {
   };
 
   const handleAddButtonClick = () => {
-    setIsFormModalVisible((prevState) => !prevState);
+    setIsAddItemModalVisible((prevState) => !prevState);
   };
+
+  const handleSignupClick = () => {
+    setIsSignupModalVisible((prevState) => !prevState);
+  }
+
+    const handleLoginClick = () => {
+    setIsLoginModalVisible((prevState) => !prevState);
+      }
+    
+    const handleEditProfileClick = () => {
+      setIsEditProfileModalVisible((prevState) => !prevState);
+    }
+
 
   const handleCloseModal = () => {
     setIsImageModalVisible(false);
-    setIsFormModalVisible(false);
+    setIsAddItemModalVisible(false);
+    setIsSignupModalVisible(false);
+    setIsLoginModalVisible(false);
+    setIsEditProfileModalVisible(false);
     setSelectedItem(null);
   };
 
@@ -53,6 +71,8 @@ function App() {
   };
 
 const handleAddItemSubmit = (item) =>{
+   const jwt = getToken();
+
    if (!jwt) {
     return;
   }
@@ -61,6 +81,7 @@ const handleAddItemSubmit = (item) =>{
   api
     .postItem(jwt, item)
     .then((newItem) => {
+      console.log(newItem)
       setClothingItems([newItem, ...clothingItems]);
       handleCloseModal();
     }).catch(console.error)
@@ -69,6 +90,24 @@ const handleAddItemSubmit = (item) =>{
     });
 };
 
+const handleRegistration = ({
+  email,
+  password,
+  name,
+  avatar,
+}) =>{
+  
+  auth
+    .signup(email, password, name, avatar)
+    .then(() =>{
+      //Navigate to login
+      
+      handleCloseModal();
+    })
+    .catch(console.error);
+};
+
+
 const handleLogin = ({
   email,
   password,
@@ -76,53 +115,55 @@ const handleLogin = ({
   auth
   .signin(email, password)
   .then((data) => {
-    setToken(data.jwt);
+    setToken(data);
     setIsLoading(true);
     setIsLoggedIn(true);
-
+    
   //redirecting users to the original desired route
-  const redirectPath = location.state?.from?.pathname || "/";
-  navigate(redirectPath);
-  
+    handleCloseModal();
+    window.location.reload();
   });
 };
 
+const handleEditProfile = (item) => {
+    const jwt = getToken();
+
+   if (!jwt) {
+    return;
+  }
+  
+   api
+    .updateUserProfile(jwt, item)
+    .then((res) => {
+      const { name, avatar } = res.data;
+      console.log(avatar);
+      setCurrentUser({name, avatar})
+      setIsEditProfileModalVisible(false);
+    })
+    .catch(console.error);
+}
+
+
 useEffect(() => {
+ const jwt = getToken();
+
   if (!jwt) {
     return;
   }
 
   auth
    .getUserInfo(jwt)
-   .then(() => {
+   .then((res) => {
+    const { name, avatar, _id } = res.data;
+    setCurrentUser({ name, avatar, _id});   
     setIsLoggedIn(true);
    })
-   .catch(console.error);
-
-}, []);
-
-
-const handleRegistration = ({
-  email,
-  password,
-  name,
-  avatar,
-}) =>{
-
-  auth
-    .signup(email, password, name, avatar)
-    .then(() =>{
-      //Navigate to login
-      navigate("/signup")
-    })
     .catch(console.error);
-  setIsLoading(true);
-};
-
-
-
+}, [
+]);
 
 const handleItemDelete = (id) => {
+   const jwt = getToken();
      if (!jwt) {
     return;
   }
@@ -151,8 +192,11 @@ const handleItemDelete = (id) => {
     useEffect(() => {
       api
       .getItems()
-       .then((data) =>{
-      const filteredData = data.filter((item) => item.name && item.link); // Validate data
+       .then((items) =>{
+      
+        let clothingItems = items.data
+      const filteredData = clothingItems.filter((item) => item.name && item.imageUrl); 
+      // Validate data
       setClothingItems(filteredData);
        }).catch(console.error);
 
@@ -164,11 +208,12 @@ const handleItemDelete = (id) => {
   return (
     <div className="App">
       <AuthenticationContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-      <CurrentUserContext.Provider value={currentUser}>
+      <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
       <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}}>
-      <AddItemModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleAddItemSubmit={handleAddItemSubmit} isLoading={isLoading}/>
-      <LoginModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleLogin={handleLogin} isLoading={isLoading}/>
-      <RegisterModal handleCloseModal={handleCloseModal} isFormModalVisible={isFormModalVisible} handleRegistration={handleRegistration} isLoading={isLoading}/>
+      <AddItemModal handleCloseModal={handleCloseModal} isAddItemModalVisible={isAddItemModalVisible} handleAddItemSubmit={handleAddItemSubmit} isLoading={isLoading}/>
+      <RegisterModal handleCloseModal={handleCloseModal} isSignupModalVisible={isSignupModalVisible} setIsLoginModalVisible={setIsLoginModalVisible} handleRegistration={handleRegistration} isLoading={isLoading} />
+      <LoginModal handleCloseModal={handleCloseModal} isLoginModalVisible={isLoginModalVisible} setIsSignupModalVisible={setIsSignupModalVisible} handleLogin={handleLogin} isLoading={isLoading}/>
+      <EditProfileModal handleCloseModal={handleCloseModal} isEditProfileModalVisible={isEditProfileModalVisible} setIsEditProfileModalVisible={setIsEditProfileModalVisible} handleEditProfile={handleEditProfile} isLoading={isLoading}/>
       <ItemModal
        handleCloseModal={handleCloseModal}
         isImageModalVisible={isImageModalVisible}
@@ -177,11 +222,14 @@ const handleItemDelete = (id) => {
       />
       <Header
         handleAddButtonClick={handleAddButtonClick}
+        handleLoginClick={handleLoginClick}
+        handleSignupClick={handleSignupClick}
         weather={weather || {}}
+        setIsLoginModalVisible={setIsLoginModalVisible}
       />
       <Routes>
-        <Route path="/" element={ 
-        <ProtectedRoute>
+      <Route path="/" element={ 
+        <ProtectedRoute anonymous>
         <Main
         clothingItems={clothingItems}
         weather={weather || {}}
@@ -195,12 +243,12 @@ const handleItemDelete = (id) => {
           <Profile  clothingItems={clothingItems}
               handleCardClick={handleCardClick}
         handleAddButtonClick={handleAddButtonClick}
+        handleEditProfileClick={handleEditProfileClick}
     />       
       </ProtectedRoute>
 } />
       
       </Routes>
-  
       <Footer />
       </CurrentTemperatureUnitContext.Provider>
       </CurrentUserContext.Provider>

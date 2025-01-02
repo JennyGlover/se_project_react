@@ -1,14 +1,14 @@
 import { request } from "./api";
 
-const baseUrl = 'http://localhost:3002';
+const baseUrl = 'http://localhost:3001';
 
 export function signup(email, password, name, avatar) {
     return request(`${baseUrl}/signup`, {
         method: "POST",
         headers: {
-            "Content-Typer": "application/json",
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(email, password, name, avatar)
+        body: JSON.stringify({ email, password, name, avatar })
     });
 }
 
@@ -18,7 +18,7 @@ export function signin(email, password) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(email, password)
+        body: JSON.stringify({ email, password })
     });
 }
 

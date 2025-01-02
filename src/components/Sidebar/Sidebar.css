@@ -1,10 +1,36 @@
 .Sidebar {
     display: flex;
-    gap: 16px;
-    align-items: center;
+    flex-direction: column;
+    font-weight: 700;
+    font-size: 20px;
+    gap: 8px;
 }
 
-.Sidebar__username {
-    font-size: 20px;
-    font-weight: 700;
+.Sidebar__button {
+    margin: 0;
+    cursor: pointer;
+}
+
+.Sidebar__user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.Sidebar__avatar,
+.Sidebar__avatar-placeholder {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+}
+
+.Sidebar__avatar-placeholder {
+    background-color: rgba(0, 0, 0, 0.20);
+    border: 1px solid rgba(0, 0, 0, 0.50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
 }

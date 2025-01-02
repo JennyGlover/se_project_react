@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "start": "json-server --watch db.json --port 3002",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -30,5 +29,5 @@
     "prettier": "^3.4.1",
     "vite": "^5.3.1"
   },
-  "homepage": ""
+  "homepage": "/se_project_react/"
 }
