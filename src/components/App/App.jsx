@@ -90,17 +90,18 @@ const handleAddItemSubmit = (item) =>{
       setIsLoading(false);
     });
 };
-const handleCardLike = (data) => {
-  
-  const { _id , likes} = data;
-  console.log(data.likes)
- 
+
+const handleCardLike = ({ _id , likes}) => {
+  console.log(likes)
   const jwt = getToken();
   if (!jwt) {
     return;
   }
+
+  const isLiked = likes?.includes(currentUser._id);
+
   // Check if this card is not currently liked
- !likes
+ !isLiked 
  ? // if so, send a request to add the user's id to the card's likes array
  api
    .addCardLike(jwt, _id)
@@ -226,9 +227,9 @@ const handleItemDelete = (id) => {
        .then((items) =>{
       
       let clothingItems = items.data
-      console.log(clothingItems);
       const filteredData = clothingItems.filter((item) => item.name && item.imageUrl); 
       // Validate data
+      console.log(filteredData);
       setClothingItems(filteredData);
        }).catch(console.error);
 
@@ -274,7 +275,7 @@ const handleItemDelete = (id) => {
         <Route path="/profile" element={
          <ProtectedRoute>
           <Profile  clothingItems={clothingItems}
-              handleCardClick={handleCardClick}
+          handleCardClick={handleCardClick}
         handleAddButtonClick={handleAddButtonClick}
         handleEditProfileClick={handleEditProfileClick}
     />       

@@ -20,12 +20,7 @@ function ItemCard({ data, handleCardClick, onCardLike}) {
 
   const isLiked = likes? likes[0] : null;
   const itemLikeButtonClassName = `ItemCard__${!isLiked ? "unlikedHeart" : "likedHeart"}`;
-
- useEffect(() => {
-    if(data.likes?.length > 0 ){
-    }
-  }, [])
-
+  
   return (
     <div
       className="ItemCard"
