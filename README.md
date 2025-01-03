@@ -5,6 +5,7 @@ This project is a front-end web application built with **React** that helps user
 ---
 
 ## **Key Features**
+
 - **Dynamic Clothing Cards**: Clothing items are displayed as cards, each with an image and title, dynamically generated from a hard-coded data array.
 - **Weather API Integration**: The app makes a call to the **OpenWeather API** to fetch current weather data, including location and temperature.
 - **Location and Temperature Display**: The app displays the current location and temperature in the header.
@@ -15,6 +16,7 @@ This project is a front-end web application built with **React** that helps user
 ---
 
 ## **Core Components**
+
 - **App.jsx**: The main wrapper for the app, responsible for managing state and rendering child components.
 - **Header**: Displays the current location, date, and temperature. Includes an "Add Clothes" button that opens the modal for adding new clothing items.
 - **Main**: Contains the weather card and the list of clothing items, filtered based on the weather data.
@@ -26,6 +28,7 @@ This project is a front-end web application built with **React** that helps user
 ---
 
 ## **Technologies Used**
+
 - **React**: For building the component-based user interface.
 - **OpenWeather API**: For fetching weather data such as current temperature and location.
 - **CSS**: For styling and responsiveness.
@@ -34,7 +37,9 @@ This project is a front-end web application built with **React** that helps user
 ---
 
 ## **Project Setup**
+
 ### 1. Create a new Vite project:
+
 Clone the repository and initialize a new **Vite** project:
 
 ```bash
@@ -42,3 +47,4 @@ cd se_project_react
 npm create vite@5.3 .
 npm install
 npm run dev
+```

@@ -1,12 +1,15 @@
 .Register__signup-link {
-    color: rgba(0, 0, 0, 0.50);
-    position: relative;
-    top: 70px;
-    left: 150px;
-    cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  top: 40px;
+  left: 85px;
+  cursor: pointer;
 }
 
 .Register__signup-link:hover {
-    color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+}
 
+.RegisterModal__input {
+  margin-bottom: 0;
 }

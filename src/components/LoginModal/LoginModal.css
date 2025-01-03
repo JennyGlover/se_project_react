@@ -1,12 +1,15 @@
 .Login__signup-link {
-    color: rgba(0, 0, 0, 0.50);
-    position: relative;
-    top: 75px;
-    left: 150px;
-    cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  top: 40px;
+  left: 95px;
+  cursor: pointer;
 }
 
 .Login__signup-link:hover {
-    color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+}
 
+.LoginModal__input {
+  margin-bottom: 0;
 }

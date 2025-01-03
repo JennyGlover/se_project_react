@@ -25,6 +25,10 @@
   font-weight: bold;
 }
 
+.ModalWithForm__form-title {
+  margin-top: 0;
+}
+
 .ModalWithForm__close-btn {
   width: 16px;
   height: 16px;
@@ -63,9 +67,10 @@
 }
 
 .ModalWithForm__submit-button {
-  width: 124px;
-  height: 36px;
-  margin-top: 32px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  width: fit-content;
+  height: fit-content;
   border-radius: 4px;
   border: none;
   font-weight: bold;
