@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import './ClothesSection.css'
 import ItemCard from '../ItemCard/ItemCard';
 import { CurrentUserContext } from '../../contexts/AppContexts';
@@ -7,6 +7,7 @@ function ClothesSection({clothingItems, handleCardClick, handleAddButtonClick}){
 
    const { currentUser }  = useContext(CurrentUserContext);
    
+ 
     return(
         <div className="ClothesSection">
          <span className="ClothesSection__title">Your Items</span> 

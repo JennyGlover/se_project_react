@@ -1,5 +1,4 @@
-import {useEffect, useState, useContext } from "react";
-import { CurrentUserContext } from '../../contexts/AppContexts';
+import {useEffect, useState} from "react";
 
 import './ItemCard.css';
 

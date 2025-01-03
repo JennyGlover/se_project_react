@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect} from 'react';
-import { Routes, Route, Navigate, useNavigate, useLocation} from 'react-router-dom';
+import { Routes, Route, Navigate} from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
@@ -30,9 +30,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name:"", avatar: "" });
-  const navigate = useNavigate();
-  const location = useLocation();
-
+ 
   const handleCardClick = (item, e) => {
     setSelectedItem(item);
     setIsImageModalVisible((prevState) => !prevState);
@@ -82,7 +80,6 @@ const handleAddItemSubmit = (item) =>{
   api
     .postItem(jwt, item)
     .then((newItem) => {
-      console.log(newItem)
       setClothingItems([newItem, ...clothingItems]);
       handleCloseModal();
     }).catch(console.error)
@@ -92,7 +89,6 @@ const handleAddItemSubmit = (item) =>{
 };
 
 const handleCardLike = ({ _id , likes}) => {
-  console.log(likes)
   const jwt = getToken();
   if (!jwt) {
     return;
@@ -168,9 +164,8 @@ const handleEditProfile = (item) => {
     .updateUserProfile(jwt, item)
     .then((res) => {
       const { name, avatar } = res.data;
-      console.log(avatar);
       setCurrentUser({name, avatar})
-      setIsEditProfileModalVisible(false);
+      handleCloseModal();
     })
     .catch(console.error);
 }
@@ -214,7 +209,7 @@ const handleItemDelete = (id) => {
           setWeather(data);
       } catch(error){
         console.error("Failed to fetch weather data:", error);
-      };
+      }
     
     };
 
@@ -229,7 +224,6 @@ const handleItemDelete = (id) => {
       let clothingItems = items.data
       const filteredData = clothingItems.filter((item) => item.name && item.imageUrl); 
       // Validate data
-      console.log(filteredData);
       setClothingItems(filteredData);
        }).catch(console.error);
 
@@ -281,7 +275,7 @@ const handleItemDelete = (id) => {
     />       
       </ProtectedRoute>
 } />
-      
+      <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
       <Footer />
       </CurrentTemperatureUnitContext.Provider>
