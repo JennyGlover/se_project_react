@@ -30,6 +30,11 @@
 .Header__button {
   font-weight: bold;
   font-size: 20px;
+  color: #000;
+}
+
+.Header__nav-link {
+  text-decoration: none;
 }
 
 .Header__button {

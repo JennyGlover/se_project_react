@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../assets/logo.png';
 import defaultAvatar from '../../assets/default-avatar.png';
@@ -11,7 +11,6 @@ function Header({
   handleSignupClick,
   handleLoginClick,
   weather,
-  setIsLoginModalVisible,
 }) {
   const currentDate = new Date().toLocaleString('default', {
     month: 'long',
@@ -19,7 +18,6 @@ function Header({
   });
 
   const { currentUser } = useContext(CurrentUserContext);
-  const navigate = useNavigate();
   return (
     <header className="Header">
       <span className="Header__page-info">
@@ -45,7 +43,9 @@ function Header({
               >
                 + Add clothes
               </button>{' '}
-              <p className="Header__text">{currentUser.name || 'Guest'}</p>
+              <Link to="/profile" className="Header__nav-link">
+                <p className="Header__text">{currentUser.name || 'Guest'}</p>
+              </Link>
             </>
           ) : (
             <p className="Header__text">
@@ -69,16 +69,7 @@ function Header({
           )}
         </span>
 
-        <div
-          onClick={() => {
-            if (currentUser.name) {
-              navigate('/profile');
-            } else {
-              setIsLoginModalVisible(true);
-            }
-          }}
-          className="Header__link"
-        >
+        <div>
           {currentUser?.avatar ? (
             <img
               src={currentUser.avatar}
