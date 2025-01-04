@@ -75,7 +75,7 @@ function App() {
 
   const handleAddItemSubmit = (item) => {
     const jwt = getToken();
-
+    console.log(item)
     if (!jwt) {
       return;
     }
@@ -141,7 +141,6 @@ function App() {
 
       //redirecting users to the original desired route
       handleCloseModal();
-      window.location.reload();
     });
   };
 
@@ -158,7 +157,6 @@ function App() {
         const { name, avatar } = res.data;
         setCurrentUser({ name, avatar });
         handleCloseModal();
-        window.location.reload();
       })
       .catch(console.error);
   };

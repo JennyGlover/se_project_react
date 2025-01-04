@@ -46,7 +46,6 @@ function Sidebar({ handleEditProfileClick }) {
         onClick={() => {
           removeToken();
           setIsLoggedIn(false);
-          window.location.reload();
         }}
       >
         Log out

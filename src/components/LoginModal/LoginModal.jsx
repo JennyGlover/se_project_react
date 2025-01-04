@@ -33,7 +33,7 @@ function LoginModal({
       isFormModalVisible={isLoginModalVisible}
       onSubmit={handleSubmit}
       title="Log in"
-      buttonText={isLoading ? 'Loging in...' : 'Log in '}
+      buttonText={'Log in '}
       name="log-in"
     >
       <label htmlFor="email" className="ModalWithForm__input-label">

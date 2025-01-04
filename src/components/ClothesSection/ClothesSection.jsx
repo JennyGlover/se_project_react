@@ -22,11 +22,12 @@ function ClothesSection({
         + Add new
       </button>
       <div className="ClothesSection__item-cards">
+        
         {clothingItems
-          .filter((item) => item.owner._id === currentUser._id)
-          .map((item) => (
-            <li key={item._id} className="ClothesSection__item-card">
-              <ItemCard data={item} handleCardClick={handleCardClick} />
+          .filter((item) => item.owner?._id === currentUser?._id) 
+          .map((newItem) => (
+            <li key={newItem._id} className="ClothesSection__item-card">
+              <ItemCard data={newItem} handleCardClick={handleCardClick} />
             </li>
           ))}
       </div>
