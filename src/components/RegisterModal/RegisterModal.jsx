@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
-import './RegisterModal.css';
+import { AuthenticationContext } from '../../contexts/AppContexts';
 import useForm from '../../hooks/useForm';
+import './RegisterModal.css';
 
 function RegisterModal({
   isSignupModalVisible,
@@ -16,7 +17,11 @@ function RegisterModal({
     name: '',
     avatar: '',
   });
-
+  const { validationFailed } = useContext(AuthenticationContext);
+  const failedValidationInputLabel = "ModalWithForm__input-label RegistrationModal__incorrect-input";
+  const failedValidationInput = "ModalWithForm__input RegistrationModal__incorrect-input ";
+  const validInput = "ModalWithForm__input";
+  const validInputLabel = "ModalWithForm__input-label";
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegistration(values);
@@ -40,13 +45,13 @@ function RegisterModal({
     >
       <label
         htmlFor="registration-email"
-        className="ModalWithForm__input-label"
+        className={validationFailed? failedValidationInputLabel : validInputLabel }
       >
-        Email*
+        {validationFailed? "Invalid Email*" : "Email*"}
       </label>
       <input
         type="email"
-        className="ModalWithForm__input"
+        className={validationFailed? failedValidationInput : validInput }
         placeholder="Email"
         id="registration-email"
         minLength="1"
@@ -54,6 +59,7 @@ function RegisterModal({
         name="email"
         value={values.email}
         onChange={handleChange}
+        required
       />
 
       <label htmlFor="password" className="ModalWithForm__input-label">
@@ -69,6 +75,7 @@ function RegisterModal({
         maxLength="14"
         value={values.password}
         onChange={handleChange}
+        required
       />
 
       <label htmlFor="username" className="ModalWithForm__input-label">
@@ -84,6 +91,7 @@ function RegisterModal({
         maxLength="30"
         value={values.name}
         onChange={handleChange}
+        required
       />
 
       <label htmlFor="avatar" className="ModalWithForm__input-label ">
@@ -97,6 +105,7 @@ function RegisterModal({
         name="avatar"
         value={values.avatar}
         onChange={handleChange}
+        required
       />
       <p
         className="Register__signup-link"

@@ -34,8 +34,9 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [validationFailed, setValidationFailed] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: '', avatar: '' });
-
+  
   const handleCardClick = (item, e) => {
     setSelectedItem(item);
     setIsImageModalVisible((prevState) => !prevState);
@@ -65,6 +66,7 @@ function App() {
     setIsLoginModalVisible(false);
     setIsEditProfileModalVisible(false);
     setSelectedItem(null);
+    setValidationFailed(false);
   };
 
   const handleToggleSwitchChange = () => {
@@ -130,7 +132,11 @@ function App() {
 
         handleCloseModal();
       })
-      .catch(console.error);
+      .catch((error) =>{
+         if (error === 400) {
+        setValidationFailed(true);
+      }
+      });
   };
 
   const handleLogin = ({ email, password }) => {
@@ -141,6 +147,13 @@ function App() {
 
       //redirecting users to the original desired route
       handleCloseModal();
+    })
+    .catch((error) => {
+      console.error(error);
+      if (error === 401) {
+        setValidationFailed(true);
+      }
+      
     });
   };
 
@@ -230,7 +243,7 @@ function App() {
 
   return (
     <div className="App">
-      <AuthenticationContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <AuthenticationContext.Provider value={{ isLoggedIn, setIsLoggedIn, validationFailed }}>
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <CurrentTemperatureUnitContext.Provider
             value={{ currentTemperatureUnit, handleToggleSwitchChange }}

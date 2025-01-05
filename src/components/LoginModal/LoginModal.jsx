@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
-import './LoginModal.css';
 import useForm from '../../hooks/useForm';
+import { useContext } from 'react';
+import { AuthenticationContext } from '../../contexts/AppContexts';
+import './LoginModal.css';
+
 
 function LoginModal({
   isLoginModalVisible,
   handleCloseModal,
   handleLogin,
-  isLoading,
   setIsSignupModalVisible,
 }) {
   const { values, handleChange, resetForm } = useForm({
@@ -15,6 +17,12 @@ function LoginModal({
     password: '',
   });
 
+  const { validationFailed } = useContext(AuthenticationContext);
+  const failedValidationInputLabel = "ModalWithForm__input-label LoginModal__incorrect-input";
+  const failedValidationInput = "ModalWithForm__input LoginModal__incorrect-input ";
+  const validInput = "ModalWithForm__input";
+  const validInputLabel = "ModalWithForm__input-label";
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(values);
@@ -27,6 +35,7 @@ function LoginModal({
     }
   }, [isLoginModalVisible]);
 
+
   return (
     <ModalWithForm
       handleCloseModal={handleCloseModal}
@@ -36,25 +45,26 @@ function LoginModal({
       buttonText={'Log in '}
       name="log-in"
     >
-      <label htmlFor="email" className="ModalWithForm__input-label">
+      <label htmlFor="email" className={validInputLabel}>
         Email
       </label>
       <input
         type="email"
-        className="ModalWithForm__input"
+        className={validInput }
         placeholder="Email"
         id="email"
         name="email"
         maxLength="50"
         value={values.email}
         onChange={handleChange}
+        required
       />
-      <label htmlFor="login-password" className="ModalWithForm__input-label">
-        Password
+      <label htmlFor="login-password" className={validationFailed? failedValidationInputLabel : validInputLabel }>
+        {validationFailed? "Incorrect Password": "Password"}
       </label>
       <input
         type="password"
-        className="ModalWithForm__input LoginModal__input"
+        className={validationFailed? failedValidationInput : validInput }
         placeholder="Password"
         id="login-password"
         name="password"
@@ -62,6 +72,7 @@ function LoginModal({
         maxLength="20"
         value={values.password}
         onChange={handleChange}
+        required
       />
       <p
         className="Login__signup-link"

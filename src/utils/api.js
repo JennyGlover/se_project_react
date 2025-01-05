@@ -1,7 +1,7 @@
 const baseUrl = 'http://localhost:3001';
 
 export function checkResponse(res) {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  return res.ok ? res.json() : Promise.reject(res.status);
 }
 
 export function request(url, options) {

@@ -13,3 +13,8 @@
 .LoginModal__input {
   margin-bottom: 0;
 }
+
+.LoginModal__incorrect-input {
+  color: red;
+  border-color: red;
+}
