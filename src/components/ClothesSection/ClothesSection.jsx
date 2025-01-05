@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import './ClothesSection.css';
 import ItemCard from '../ItemCard/ItemCard';
 import { CurrentUserContext } from '../../contexts/AppContexts';
@@ -7,6 +7,7 @@ function ClothesSection({
   clothingItems,
   handleCardClick,
   handleAddButtonClick,
+  onCardLike
 }) {
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -24,10 +25,16 @@ function ClothesSection({
       <div className="ClothesSection__item-cards">
         
         {clothingItems
-          .filter((item) => item.owner?._id === currentUser?._id) 
-          .map((newItem) => (
-            <li key={newItem._id} className="ClothesSection__item-card">
-              <ItemCard data={newItem} handleCardClick={handleCardClick} />
+          .filter((item) => item.owner?._id !== 2) // Filter item that are owner's
+          .map((
+            filteredItem// Render filtered items
+          ) => (
+            <li key={filteredItem._id} className="ClothesSection__item-card">
+             <ItemCard
+                  data={filteredItem}
+                  handleCardClick={handleCardClick}
+                  onCardLike={onCardLike}
+                />
             </li>
           ))}
       </div>

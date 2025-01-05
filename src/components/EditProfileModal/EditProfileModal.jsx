@@ -26,6 +26,7 @@ function EditProfileModal({
       setValues({ name: currentUser.name, avatar: currentUser.avatar });
     }
   }, [currentUser, setValues]);
+  
 
   return (
     <ModalWithForm

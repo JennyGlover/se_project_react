@@ -35,7 +35,7 @@ function RegisterModal({
       isFormModalVisible={isSignupModalVisible}
       onSubmit={handleSubmit}
       title="Sign Up"
-      buttonText={isLoading ? 'Loading...' : 'Next'}
+      buttonText={'Next'}
       name="log-in"
     >
       <label

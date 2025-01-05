@@ -7,14 +7,18 @@ function Profile({
   handleCardClick,
   handleAddButtonClick,
   handleEditProfileClick,
+  onCardLike
 }) {
+  
   return (
+
     <div className="Profile">
       <Sidebar handleEditProfileClick={handleEditProfileClick} />
       <ClothesSection
         clothingItems={clothingItems}
         handleCardClick={handleCardClick}
         handleAddButtonClick={handleAddButtonClick}
+        onCardLike={onCardLike}
       />
     </div>
   );

@@ -1,10 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../assets/logo.png';
 import defaultAvatar from '../../assets/default-avatar.png';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import { CurrentUserContext } from '../../contexts/AppContexts';
+import { AuthenticationContext } from '../../contexts/AppContexts';
 
 function Header({
   handleAddButtonClick,
@@ -18,6 +19,12 @@ function Header({
   });
 
   const { currentUser } = useContext(CurrentUserContext);
+  const { isLoggedIn } = useContext(AuthenticationContext);
+
+  useEffect(() => {
+   console.log("current user changed")
+  }, [currentUser])
+
   return (
     <header className="Header">
       <span className="Header__page-info">
@@ -32,7 +39,7 @@ function Header({
         <span className="Header__menu">
           <ToggleSwitch />
 
-          {currentUser.name ? (
+          {isLoggedIn && currentUser.name? (
             <>
               {' '}
               <button
@@ -70,7 +77,7 @@ function Header({
         </span>
 
         <div>
-          {currentUser?.avatar ? (
+          {isLoggedIn && currentUser?.avatar ? (
             <img
               src={currentUser.avatar}
               className="Header__avatar"
@@ -78,7 +85,7 @@ function Header({
             />
           ) : (
             <div className="Header__avatar-placeholder">
-              {currentUser.name ? (
+              { isLoggedIn && currentUser.name ? (
                 <p> {currentUser.name[0].toUpperCase()} </p>
               ) : (
                 <img

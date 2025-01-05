@@ -73,9 +73,9 @@ function App() {
       : setCurrentTemperatureUnit('F');
   };
 
+  //Adding a card
   const handleAddItemSubmit = (item) => {
     const jwt = getToken();
-    console.log(item)
     if (!jwt) {
       return;
     }
@@ -84,7 +84,9 @@ function App() {
     api
       .postItem(jwt, item)
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+         setClothingItems((prevItems) =>{
+         return [newItem, ...prevItems];
+        });
         handleCloseModal();
       })
       .catch(console.error)
@@ -93,6 +95,7 @@ function App() {
       });
   };
 
+  //Liking a card
   const handleCardLike = ({ _id, likes }) => {
     const jwt = getToken();
     if (!jwt) {
@@ -101,26 +104,23 @@ function App() {
 
     const isLiked = likes?.includes(currentUser._id);
 
-    // Check if this card is not currently liked
-    !isLiked
-      ? // if so, send a request to add the user's id to the card's likes array
-        api
-          .addCardLike(jwt, _id)
-          .then((res) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === _id ? res.data : item)),
-            );
-          })
-          .catch(console.error)
-      : api
-          .removeCardLike(jwt, _id)
-          .then((res) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === _id ? res.data : item)),
-            );
-          })
-          .catch(console.error);
-  };
+    const apiCall = isLiked? api.removeCardLike : api.addCardLike;
+
+    apiCall(jwt, _id)
+      .then((res) => {
+        setClothingItems((prevItems) =>
+          prevItems.map((item) => 
+            item._id === _id
+            ? {...item, ...res.data} //Merging the updated fields with the existing card
+            : item 
+          )
+        );
+
+         })
+    .catch(console.error);
+
+    };
+
 
   const handleRegistration = ({ email, password, name, avatar }) => {
     auth
@@ -144,6 +144,7 @@ function App() {
     });
   };
 
+  //Updating user profile
   const handleEditProfile = (item) => {
     const jwt = getToken();
 
@@ -160,6 +161,7 @@ function App() {
       })
       .catch(console.error);
   };
+
 
   useEffect(() => {
     const jwt = getToken();
@@ -207,8 +209,10 @@ function App() {
     getWeatherData();
   }, []);
 
+  //retrieving cards when page loads
   useEffect(() => {
-    api
+     
+   api
       .getItems()
       .then((items) => {
         let clothingItems = items.data;
@@ -219,7 +223,10 @@ function App() {
         setClothingItems(filteredData);
       })
       .catch(console.error);
-  }, []);
+  }
+      
+ , [clothingItems.length]); //need to remove this
+
 
   return (
     <div className="App">
@@ -292,6 +299,7 @@ function App() {
                       handleCardClick={handleCardClick}
                       handleAddButtonClick={handleAddButtonClick}
                       handleEditProfileClick={handleEditProfileClick}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }

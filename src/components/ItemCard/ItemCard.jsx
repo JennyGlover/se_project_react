@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState, useContext} from 'react';
+import { AuthenticationContext } from '../../contexts/AppContexts';
 import './ItemCard.css';
 
 function ItemCard({ data, handleCardClick, onCardLike }) {
   const [likes, setLikes] = useState(data.likes || []);
+  const { isLoggedIn } = useContext(AuthenticationContext);
 
   useEffect(() => {
     if (data.likes) {
@@ -13,9 +14,7 @@ function ItemCard({ data, handleCardClick, onCardLike }) {
 
   const handleLike = (data, e) => {
     e.stopPropagation();
-    if (onCardLike) {
-      onCardLike(data);
-    }
+    onCardLike(data);
   };
 
   const isLiked = likes ? likes[0] : null;
@@ -30,10 +29,10 @@ function ItemCard({ data, handleCardClick, onCardLike }) {
     >
       <div className="ItemCard__top-content">
         <p className="ItemCard__title">{data.name}</p>{' '}
-        {
+        { 
           <div
             onClick={(e) => handleLike(data, e)}
-            className={itemLikeButtonClassName}
+            className={isLoggedIn? itemLikeButtonClassName : ""}
           >
             {' '}
           </div>

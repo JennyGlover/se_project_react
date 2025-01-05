@@ -18,7 +18,6 @@ function AddItemModal({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleAddItemSubmit(values);
-    console.log(values);
   };
 
   //Resetting the form values whenever the modal is closed

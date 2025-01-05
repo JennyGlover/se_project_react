@@ -1,11 +1,12 @@
 import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CurrentTemperatureUnitContext } from '../../contexts/AppContexts';
 import './Main.css';
 
 function Main({ clothingItems, weather, handleCardClick, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+
   return (
     <main className="Main">
       <WeatherCard weatherData={weather} />
@@ -21,7 +22,7 @@ function Main({ clothingItems, weather, handleCardClick, onCardLike }) {
           .filter((item) => item.weather === weather.weatherType) // Filter by weather type
           .map(
             (
-              filteredItem, // Render filtered items
+              filteredItem // Render filtered items
             ) => (
               <li key={filteredItem._id} className="Main__item-card">
                 <ItemCard

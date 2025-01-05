@@ -13,6 +13,7 @@ function ProtectedRoute({
 
   // Destructuring isLoggedIn from the value provided by AuthenticationContext
   const { isLoggedIn } = useContext(AuthenticationContext);
+   
 
   // If user is not logged in and tries to access nonanonymous route redirect them to the main route.
   if (!anonymous && !isLoggedIn) {
