@@ -5,7 +5,6 @@ import { useContext } from 'react';
 import { AuthenticationContext } from '../../contexts/AppContexts';
 import './LoginModal.css';
 
-
 function LoginModal({
   isLoginModalVisible,
   handleCloseModal,
@@ -18,11 +17,13 @@ function LoginModal({
   });
 
   const { validationFailed } = useContext(AuthenticationContext);
-  const failedValidationInputLabel = "ModalWithForm__input-label LoginModal__incorrect-input";
-  const failedValidationInput = "ModalWithForm__input LoginModal__incorrect-input ";
-  const validInput = "ModalWithForm__input";
-  const validInputLabel = "ModalWithForm__input-label";
- 
+  const failedValidationInputLabel =
+    'ModalWithForm__input-label LoginModal__incorrect-input';
+  const failedValidationInput =
+    'ModalWithForm__input LoginModal__incorrect-input ';
+  const validInput = 'ModalWithForm__input';
+  const validInputLabel = 'ModalWithForm__input-label';
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(values);
@@ -34,7 +35,6 @@ function LoginModal({
       resetForm();
     }
   }, [isLoginModalVisible]);
-
 
   return (
     <ModalWithForm
@@ -50,7 +50,7 @@ function LoginModal({
       </label>
       <input
         type="email"
-        className={validInput }
+        className={validInput}
         placeholder="Email"
         id="email"
         name="email"
@@ -59,12 +59,17 @@ function LoginModal({
         onChange={handleChange}
         required
       />
-      <label htmlFor="login-password" className={validationFailed? failedValidationInputLabel : validInputLabel }>
-        {validationFailed? "Incorrect Password": "Password"}
+      <label
+        htmlFor="login-password"
+        className={
+          validationFailed ? failedValidationInputLabel : validInputLabel
+        }
+      >
+        {validationFailed ? 'Incorrect Password' : 'Password'}
       </label>
       <input
         type="password"
-        className={validationFailed? failedValidationInput : validInput }
+        className={validationFailed ? failedValidationInput : validInput}
         placeholder="Password"
         id="login-password"
         name="password"

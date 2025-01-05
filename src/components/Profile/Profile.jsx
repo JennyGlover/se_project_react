@@ -7,11 +7,9 @@ function Profile({
   handleCardClick,
   handleAddButtonClick,
   handleEditProfileClick,
-  onCardLike
+  onCardLike,
 }) {
-  
   return (
-
     <div className="Profile">
       <Sidebar handleEditProfileClick={handleEditProfileClick} />
       <ClothesSection

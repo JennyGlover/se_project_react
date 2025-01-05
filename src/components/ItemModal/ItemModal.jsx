@@ -11,7 +11,7 @@ function ItemModal({
   const { currentUser } = useContext(CurrentUserContext);
 
   // Checking if the current user is the owner of the current clothing item
-  const isOwn = data?.owner._id === currentUser._id;
+  const isOwn = data?.owner._id === currentUser?._id;
 
   // Creating a variable which then set in `className` for the delete button
 

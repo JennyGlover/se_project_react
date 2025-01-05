@@ -1,15 +1,20 @@
-import { useContext, useEffect } from 'react';
-import './ClothesSection.css';
+import { useContext } from 'react';
 import ItemCard from '../ItemCard/ItemCard';
 import { CurrentUserContext } from '../../contexts/AppContexts';
+import './ClothesSection.css';
 
 function ClothesSection({
   clothingItems,
   handleCardClick,
   handleAddButtonClick,
-  onCardLike
+  onCardLike,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
+  const filteredItems = clothingItems.filter((item) => {
+    return (
+      item.owner?._id !== undefined && item.owner?._id === currentUser?._id
+    );
+  });
 
   return (
     <div className="ClothesSection">
@@ -23,20 +28,20 @@ function ClothesSection({
         + Add new
       </button>
       <div className="ClothesSection__item-cards">
-        
-        {clothingItems
-          .filter((item) => item.owner?._id !== 2) // Filter item that are owner's
-          .map((
-            filteredItem// Render filtered items
-          ) => (
-            <li key={filteredItem._id} className="ClothesSection__item-card">
-             <ItemCard
+        {filteredItems // Filter item that are owner's
+          .map(
+            (
+              filteredItem, // Render filtered items
+            ) => (
+              <li key={filteredItem._id} className="ClothesSection__item-card">
+                <ItemCard
                   data={filteredItem}
                   handleCardClick={handleCardClick}
                   onCardLike={onCardLike}
                 />
-            </li>
-          ))}
+              </li>
+            ),
+          )}
       </div>
     </div>
   );

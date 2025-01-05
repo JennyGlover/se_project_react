@@ -8,7 +8,6 @@ function RegisterModal({
   isSignupModalVisible,
   handleCloseModal,
   handleRegistration,
-  isLoading,
   setIsLoginModalVisible,
 }) {
   const { values, handleChange, resetForm } = useForm({
@@ -18,10 +17,12 @@ function RegisterModal({
     avatar: '',
   });
   const { validationFailed } = useContext(AuthenticationContext);
-  const failedValidationInputLabel = "ModalWithForm__input-label RegistrationModal__incorrect-input";
-  const failedValidationInput = "ModalWithForm__input RegistrationModal__incorrect-input ";
-  const validInput = "ModalWithForm__input";
-  const validInputLabel = "ModalWithForm__input-label";
+  const failedValidationInputLabel =
+    'ModalWithForm__input-label RegistrationModal__incorrect-input';
+  const failedValidationInput =
+    'ModalWithForm__input RegistrationModal__incorrect-input ';
+  const validInput = 'ModalWithForm__input';
+  const validInputLabel = 'ModalWithForm__input-label';
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegistration(values);
@@ -45,13 +46,15 @@ function RegisterModal({
     >
       <label
         htmlFor="registration-email"
-        className={validationFailed? failedValidationInputLabel : validInputLabel }
+        className={
+          validationFailed ? failedValidationInputLabel : validInputLabel
+        }
       >
-        {validationFailed? "Invalid Email*" : "Email*"}
+        {validationFailed ? 'Invalid Email*' : 'Email*'}
       </label>
       <input
         type="email"
-        className={validationFailed? failedValidationInput : validInput }
+        className={validationFailed ? failedValidationInput : validInput}
         placeholder="Email"
         id="registration-email"
         minLength="1"

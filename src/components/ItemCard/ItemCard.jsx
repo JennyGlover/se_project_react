@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext} from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { AuthenticationContext } from '../../contexts/AppContexts';
 import './ItemCard.css';
 
@@ -29,10 +29,10 @@ function ItemCard({ data, handleCardClick, onCardLike }) {
     >
       <div className="ItemCard__top-content">
         <p className="ItemCard__title">{data.name}</p>{' '}
-        { 
+        {
           <div
             onClick={(e) => handleLike(data, e)}
-            className={isLoggedIn? itemLikeButtonClassName : ""}
+            className={isLoggedIn ? itemLikeButtonClassName : ''}
           >
             {' '}
           </div>

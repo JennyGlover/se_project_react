@@ -35,8 +35,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [validationFailed, setValidationFailed] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ name: '', avatar: '' });
-  
+  const [currentUser, setCurrentUser] = useState({
+    name: '',
+    avatar: '',
+    _id: null,
+  });
+
   const handleCardClick = (item, e) => {
     setSelectedItem(item);
     setIsImageModalVisible((prevState) => !prevState);
@@ -86,8 +90,8 @@ function App() {
     api
       .postItem(jwt, item)
       .then((newItem) => {
-         setClothingItems((prevItems) =>{
-         return [newItem, ...prevItems];
+        setClothingItems((prevItems) => {
+          return [newItem, ...prevItems];
         });
         handleCloseModal();
       })
@@ -106,23 +110,20 @@ function App() {
 
     const isLiked = likes?.includes(currentUser._id);
 
-    const apiCall = isLiked? api.removeCardLike : api.addCardLike;
+    const apiCall = isLiked ? api.removeCardLike : api.addCardLike;
 
     apiCall(jwt, _id)
       .then((res) => {
         setClothingItems((prevItems) =>
-          prevItems.map((item) => 
+          prevItems.map((item) =>
             item._id === _id
-            ? {...item, ...res.data} //Merging the updated fields with the existing card
-            : item 
-          )
+              ? { ...item, ...res.data } //Merging the updated fields with the existing card
+              : item,
+          ),
         );
-
-         })
-    .catch(console.error);
-
-    };
-
+      })
+      .catch(console.error);
+  };
 
   const handleRegistration = ({ email, password, name, avatar }) => {
     auth
@@ -132,29 +133,30 @@ function App() {
 
         handleCloseModal();
       })
-      .catch((error) =>{
-         if (error === 400) {
-        setValidationFailed(true);
-      }
+      .catch((error) => {
+        if (error === 400) {
+          setValidationFailed(true);
+        }
       });
   };
 
   const handleLogin = ({ email, password }) => {
-    auth.signin(email, password).then((data) => {
-      setToken(data);
-      setIsLoading(true);
-      setIsLoggedIn(true);
+    auth
+      .signin(email, password)
+      .then((data) => {
+        setToken(data);
+        setIsLoading(true);
+        setIsLoggedIn(true);
 
-      //redirecting users to the original desired route
-      handleCloseModal();
-    })
-    .catch((error) => {
-      console.error(error);
-      if (error === 401) {
-        setValidationFailed(true);
-      }
-      
-    });
+        //redirecting users to the original desired route
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error === 401) {
+          setValidationFailed(true);
+        }
+      });
   };
 
   //Updating user profile
@@ -174,7 +176,6 @@ function App() {
       })
       .catch(console.error);
   };
-
 
   useEffect(() => {
     const jwt = getToken();
@@ -224,8 +225,7 @@ function App() {
 
   //retrieving cards when page loads
   useEffect(() => {
-     
-   api
+    api
       .getItems()
       .then((items) => {
         let clothingItems = items.data;
@@ -236,14 +236,13 @@ function App() {
         setClothingItems(filteredData);
       })
       .catch(console.error);
-  }
-      
- , [clothingItems.length]); //need to remove this
-
+  }, [clothingItems.length]); //need to remove this
 
   return (
     <div className="App">
-      <AuthenticationContext.Provider value={{ isLoggedIn, setIsLoggedIn, validationFailed }}>
+      <AuthenticationContext.Provider
+        value={{ isLoggedIn, setIsLoggedIn, validationFailed }}
+      >
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <CurrentTemperatureUnitContext.Provider
             value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -259,7 +258,6 @@ function App() {
               isSignupModalVisible={isSignupModalVisible}
               setIsLoginModalVisible={setIsLoginModalVisible}
               handleRegistration={handleRegistration}
-              isLoading={isLoading}
             />
             <LoginModal
               handleCloseModal={handleCloseModal}
