@@ -1,7 +1,7 @@
 const baseUrl = 'http://localhost:3001';
 
 export function checkResponse(res) {
-  return res.ok ? res.json() : Promise.reject(res.status);
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
 export function request(url, options) {
@@ -18,7 +18,6 @@ function postItem(token, item) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
     },
     body: JSON.stringify(item),
   });
@@ -30,7 +29,6 @@ function updateUserProfile(token, item) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
     },
 
     body: JSON.stringify(item),
@@ -43,7 +41,6 @@ function deleteItem(token, id) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
     },
   });
 }
@@ -54,7 +51,6 @@ function addCardLike(token, id) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
     },
   });
 }
@@ -65,7 +61,6 @@ function removeCardLike(token, id) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
     },
   });
 }

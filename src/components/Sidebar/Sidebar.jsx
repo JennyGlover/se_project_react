@@ -6,7 +6,7 @@ import { removeToken } from '../../utils/token';
 import { AuthenticationContext } from '../../contexts/AppContexts';
 
 function Sidebar({ handleEditProfileClick }) {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const { setIsLoggedIn } = useContext(AuthenticationContext);
 
   return (
@@ -46,6 +46,11 @@ function Sidebar({ handleEditProfileClick }) {
         onClick={() => {
           removeToken();
           setIsLoggedIn(false);
+          setCurrentUser({
+            name: '',
+            avatar: '',
+            _id: null,
+          });
         }}
       >
         Log out

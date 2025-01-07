@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext} from 'react';
 import './ItemModal.css';
 import { CurrentUserContext } from '../../contexts/AppContexts';
 
@@ -12,8 +12,6 @@ function ItemModal({
 
   // Checking if the current user is the owner of the current clothing item
   const isOwn = data?.owner === currentUser?._id;
-
-  // Creating a variable which then set in `className` for the delete button
 
   return (
     <div

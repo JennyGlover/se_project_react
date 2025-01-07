@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
@@ -40,8 +40,7 @@ function App() {
     avatar: '',
     _id: null,
   });
-  const location = useLocation();
-  const navigate = useNavigate();
+
   const jwt = getToken();
 
   const handleCardClick = (item, e) => {
@@ -180,7 +179,7 @@ function App() {
     if (!jwt) {
       return;
     }
-    
+
     auth
       .getUserInfo(jwt)
       .then((res) => {
@@ -233,7 +232,6 @@ function App() {
       })
       .catch(console.error);
   }, [clothingItems.length]); //need to remove this
- 
 
   return (
     <div className="App">
@@ -284,7 +282,7 @@ function App() {
               setIsLoginModalVisible={setIsLoginModalVisible}
             />
             <Routes>
-                 <Route
+              <Route
                 path="/login"
                 element={
                   <ProtectedRoute anonymous>
@@ -315,7 +313,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute >
+                  <ProtectedRoute>
                     <Profile
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
