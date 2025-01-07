@@ -113,20 +113,11 @@ function App() {
         setClothingItems((prevItems) =>
           prevItems.map((item) =>
             item._id === _id
-              ? { ...item, ...res.data } //Merging the updated fields with the existing card
+              ? res.data
               : item,
           ),
         );
-        if (res.data.owner === currentUser?._id){
-           setCurrentUser((prevUser) => ({
-            ...prevUser,
-            name: prevUser.name,
-            avatar: prevUser.avatar,
-            _id: res.data.owner,
-          }));
-        }
-      
-        console.log(res.message + " by " + currentUser._id);
+        setClothingItems(clothingItems.map((card) => card._id === _id ? res.data : card))
       })
       .catch(console.error);
   };
@@ -297,7 +288,7 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <ProtectedRoute anonymous>
+                  <ProtectedRoute anonymous >
                     <Main
                       clothingItems={clothingItems}
                       weather={weather || {}}
@@ -311,7 +302,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute >
                     <Profile
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
@@ -322,7 +313,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route path="*" element={<Navigate to="/home" />} />
+              {/* <Route path="*" element={<Navigate to="/" />} /> */}
             </Routes>
             <Footer />
           </CurrentTemperatureUnitContext.Provider>
