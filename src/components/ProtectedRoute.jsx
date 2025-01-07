@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthenticationContext } from '../contexts/AppContexts';
 
@@ -9,16 +9,13 @@ function ProtectedRoute({ children, anonymous = false }) {
 
   // Destructuring context values
   const { isLoggedIn } = useContext(AuthenticationContext);
-  // Wait until authentication status is determined
 
-  //redirect user away from anonymous route if logged in
   if (anonymous && isLoggedIn) {
     return <Navigate to={from} />;
   }
 
   //  If user is not logged in and route is not anonymous, redirect to "/"
   if (!isLoggedIn && !anonymous) {
-    console.log('not logged in')
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

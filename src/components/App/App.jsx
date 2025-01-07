@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
@@ -189,20 +189,20 @@ function App() {
         setIsLoading(false);
       });
   };
-
   useEffect(() => {
     if (!jwt) {
       return;
     }
-
+    
     auth
       .getUserInfo(jwt)
       .then((res) => {
         const { name, avatar, _id } = res.data;
         setCurrentUser({ name, avatar, _id });
+        setIsLoggedIn(true);
       })
       .catch(console.error);
-  }, []);
+  }, [jwt]);
 
   const handleItemDelete = (id) => {
     if (!jwt) {
@@ -303,8 +303,8 @@ function App() {
               weather={weather || {}}
               setIsLoginModalVisible={setIsLoginModalVisible}
             />
-            <Routes>
-              <Route
+           <Routes>
+                 <Route
                 path="/login"
                 element={
                   <ProtectedRoute anonymous>
@@ -321,7 +321,6 @@ function App() {
               <Route
                 path="/"
                 element={
-                    <ProtectedRoute>
                     <Main
                       clothingItems={clothingItems}
                       weather={weather || {}}
@@ -329,13 +328,12 @@ function App() {
                       handleCloseModal={handleCloseModal}
                       onCardLike={handleCardLike}
                     />
-                    </ProtectedRoute>
                 }
               />
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute >
                     <Profile
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
@@ -346,7 +344,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              {/* <Route path="*" element={<Navigate to="/" />} /> */}
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             <Footer />
           </CurrentTemperatureUnitContext.Provider>
