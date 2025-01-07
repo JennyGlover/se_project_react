@@ -93,7 +93,7 @@ function App() {
       .postItem(jwt, item)
       .then((newItem) => {
         setClothingItems((prevItems) => {
-          return [newItem, ...prevItems];
+          return [...prevItems, newItem.data];
         });
         handleCloseModal();
       })
@@ -117,9 +117,6 @@ function App() {
       .then((res) => {
         setClothingItems((prevItems) =>
           prevItems.map((item) => (item._id === _id ? res.data : item)),
-        );
-        setClothingItems(
-          clothingItems.map((card) => (card._id === _id ? res.data : card)),
         );
       })
       .catch(console.error);
