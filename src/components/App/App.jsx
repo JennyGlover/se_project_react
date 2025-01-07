@@ -32,7 +32,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
   const [clothingItems, setClothingItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [validationFailed, setValidationFailed] = useState(false);
   const [currentUser, setCurrentUser] = useState({
@@ -50,6 +50,7 @@ function App() {
   };
 
   const handleAddButtonClick = () => {
+    setIsLoading(false);
     setIsAddItemModalVisible((prevState) => !prevState);
   };
 
@@ -62,6 +63,7 @@ function App() {
   };
 
   const handleEditProfileClick = () => {
+    setIsLoading(false);
     setIsEditProfileModalVisible((prevState) => !prevState);
   };
 
@@ -93,9 +95,13 @@ function App() {
         setClothingItems((prevItems) => {
           return [newItem, ...prevItems];
         });
+        setIsLoading(true);
         handleCloseModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   //Liking a card
@@ -125,7 +131,7 @@ function App() {
       .signup(email, password, name, avatar)
       .then(() => {
         //Navigate to login
-
+        setIsLoading(true);
         handleCloseModal();
         setIsLoginModalVisible(true);
       })
@@ -133,6 +139,9 @@ function App() {
         if (error === 400) {
           setValidationFailed(true);
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -141,13 +150,12 @@ function App() {
       .signin(email, password)
       .then((data) => {
         setToken(data.token);
-        setIsLoading(true);
         const { name, avatar, _id } = data;
         setCurrentUser({ name, avatar, _id });
         //redirecting users to the original desired route
+        setIsLoading(true);
         setIsLoggedIn(true);
         handleCloseModal();
-
         // const redirectPath = location.state?.from?.pathname || "/";
         // Navigate(redirectPath);
       })
@@ -156,6 +164,9 @@ function App() {
         if (error === 401) {
           setValidationFailed(true);
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -170,9 +181,13 @@ function App() {
       .then((res) => {
         const { name, avatar, _id } = res.data;
         setCurrentUser({ name, avatar, _id });
+        setIsLoading(true);
         handleCloseModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -185,7 +200,6 @@ function App() {
       .then((res) => {
         const { name, avatar, _id } = res.data;
         setCurrentUser({ name, avatar, _id });
-        setIsLoggedIn(true);
       })
       .catch(console.error);
   }, [jwt]);
@@ -205,6 +219,7 @@ function App() {
       .catch(console.error);
   };
 
+  //retrieving weather data
   useEffect(() => {
     const getWeatherData = async () => {
       try {
@@ -253,6 +268,7 @@ function App() {
               isSignupModalVisible={isSignupModalVisible}
               setIsLoginModalVisible={setIsLoginModalVisible}
               handleRegistration={handleRegistration}
+              isLoading={isLoading}
             />
             <LoginModal
               handleCloseModal={handleCloseModal}

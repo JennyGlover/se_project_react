@@ -10,6 +10,7 @@ function LoginModal({
   handleCloseModal,
   handleLogin,
   setIsSignupModalVisible,
+  isLoading,
 }) {
   const { values, handleChange, resetForm } = useForm({
     email: '',
@@ -50,7 +51,7 @@ function LoginModal({
       isFormModalVisible={isLoginModalVisible}
       onSubmit={handleSubmit}
       title="Log in"
-      buttonText={'Log in '}
+      buttonText={isLoading ? 'Logging in...' : 'Log In'}
       name="log-in"
       isFormValid={isFormValid}
     >
@@ -96,7 +97,7 @@ function LoginModal({
           setIsSignupModalVisible(true);
         }}
       >
-        or Sign Up
+        {!isLoading ? ' or Sign Up' : ''}
       </p>
     </ModalWithForm>
   );

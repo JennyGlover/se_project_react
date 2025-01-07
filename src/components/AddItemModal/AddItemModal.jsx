@@ -35,7 +35,6 @@ function AddItemModal({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleAddItemSubmit(values);
-    console.log(values);
   };
 
   //Resetting the form values whenever the modal is closed
@@ -51,7 +50,7 @@ function AddItemModal({
       isFormModalVisible={isAddItemModalVisible}
       onSubmit={handleSubmit}
       title="New garment"
-      buttonText={'Add Garment '}
+      buttonText={isLoading ? 'Saving...' : 'Add Garment'}
       name="add-garment"
       isFormValid={isFormValid}
     >

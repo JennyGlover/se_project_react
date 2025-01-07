@@ -9,6 +9,7 @@ function RegisterModal({
   handleCloseModal,
   handleRegistration,
   setIsLoginModalVisible,
+  isLoading,
 }) {
   const { values, handleChange, resetForm } = useForm({
     email: '',
@@ -56,7 +57,7 @@ function RegisterModal({
       isFormModalVisible={isSignupModalVisible}
       onSubmit={handleSubmit}
       title="Sign Up"
-      buttonText={'Next'}
+      buttonText={isLoading ? 'Signing Up...' : 'Next'}
       name="log-in"
       isFormValid={isFormValid}
     >
@@ -135,7 +136,7 @@ function RegisterModal({
           setIsLoginModalVisible(true);
         }}
       >
-        or Login
+        {!isLoading ? ' or Log In' : ''}
       </p>
     </ModalWithForm>
   );
