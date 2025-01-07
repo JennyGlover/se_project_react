@@ -1,4 +1,4 @@
-import { useEffect, useRef} from 'react';
+import { useEffect, useRef } from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import useForm from '../../hooks/useForm';
 import { useContext } from 'react';
@@ -15,15 +15,14 @@ function LoginModal({
     email: '',
     password: '',
   });
- 
-   const emailRef = useRef();
-   const passwordRef = useRef();
 
-   
-   const isFormValid = Object.values(values).every((value, index) =>{
-     const input =  [emailRef.current, passwordRef.current][index];;
-     return value.trim() !== "" && input?.validity.valid
-   } );
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const isFormValid = Object.values(values).every((value, index) => {
+    const input = [emailRef.current, passwordRef.current][index];
+    return value.trim() !== '' && input?.validity.valid;
+  });
 
   const { validationFailed } = useContext(AuthenticationContext);
   const failedValidationInputLabel =
@@ -64,7 +63,6 @@ function LoginModal({
         placeholder="Email"
         id="email"
         name="email"
-        maxLength="50"
         value={values.email}
         onChange={handleChange}
         ref={emailRef}
@@ -85,7 +83,7 @@ function LoginModal({
         id="login-password"
         name="password"
         minLength="8"
-        maxLength="20"
+        maxLength="16"
         value={values.password}
         onChange={handleChange}
         ref={passwordRef}

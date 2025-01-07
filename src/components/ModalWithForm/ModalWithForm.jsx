@@ -28,7 +28,14 @@ function ModalWithForm({
           }}
         />
         {children}
-        <button type="submit" className={isFormValid? "ModalWithForm__submit-button" : "ModalWithForm__submit-button-disabled" } >
+        <button
+          type="submit"
+          className={
+            isFormValid
+              ? 'ModalWithForm__submit-button'
+              : 'ModalWithForm__submit-button-disabled'
+          }
+        >
           {buttonText}
         </button>
       </form>

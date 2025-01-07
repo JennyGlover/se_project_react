@@ -1,13 +1,9 @@
 const TOKEN_KEY = 'jwt';
 
-export const setToken = (token) =>
-  localStorage.setItem(TOKEN_KEY, JSON.stringify(token));
+export const setToken = (token) => localStorage.setItem(TOKEN_KEY, token);
 
 export const getToken = () => {
-  const jwtString = localStorage.getItem(TOKEN_KEY);
-  const jwtObject = jwtString ? JSON.parse(jwtString) : null;
-
-  return jwtObject ? jwtObject.token : null;
+  return localStorage.getItem(TOKEN_KEY);
 };
 
 export const removeToken = () => {

@@ -62,7 +62,7 @@
   accent-color: rgb(0, 0, 0);
 }
 
-.ModalWithForm__radio-input:checked+span {
+.ModalWithForm__radio-input:checked + span {
   color: rgb(0, 0, 0);
 }
 

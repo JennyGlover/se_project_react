@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
@@ -40,6 +40,7 @@ function App() {
     avatar: '',
     _id: null,
   });
+  const location = useLocation();
 
   const handleCardClick = (item, e) => {
     setSelectedItem(item);
@@ -94,8 +95,8 @@ function App() {
         });
         handleCloseModal();
       })
-      .catch(console.error)
-  };;
+      .catch(console.error);
+  };
 
   //Liking a card
   const handleCardLike = ({ _id, likes }) => {
@@ -111,13 +112,11 @@ function App() {
     apiCall(jwt, _id)
       .then((res) => {
         setClothingItems((prevItems) =>
-          prevItems.map((item) =>
-            item._id === _id
-              ? res.data
-              : item,
-          ),
+          prevItems.map((item) => (item._id === _id ? res.data : item)),
         );
-        setClothingItems(clothingItems.map((card) => card._id === _id ? res.data : card))
+        setClothingItems(
+          clothingItems.map((card) => (card._id === _id ? res.data : card)),
+        );
       })
       .catch(console.error);
   };
@@ -129,6 +128,7 @@ function App() {
         //Navigate to login
 
         handleCloseModal();
+        setIsLoginModalVisible(true);
       })
       .catch((error) => {
         if (error === 400) {
@@ -141,13 +141,16 @@ function App() {
     auth
       .signin(email, password)
       .then((data) => {
-        setToken(data);
+        setToken(data.token);
         setIsLoading(true);
-        const { name, avatar, _id} = data;
+        const { name, avatar, _id } = data;
         setCurrentUser({ name, avatar, _id });
         //redirecting users to the original desired route
         setIsLoggedIn(true);
         handleCloseModal();
+
+        // const redirectPath = location.state?.from?.pathname || "/";
+        // Navigate(redirectPath);
       })
       .catch((error) => {
         console.error(error);
@@ -168,7 +171,7 @@ function App() {
     api
       .updateUserProfile(jwt, item)
       .then((res) => {
-        const { name, avatar, _id} = res. data;
+        const { name, avatar, _id } = res.data;
         setCurrentUser({ name, avatar, _id });
         handleCloseModal();
       })
@@ -177,7 +180,6 @@ function App() {
 
   useEffect(() => {
     const jwt = getToken();
-
     if (!jwt) {
       return;
     }
@@ -239,7 +241,7 @@ function App() {
   return (
     <div className="App">
       <AuthenticationContext.Provider
-        value={{ isLoggedIn, setIsLoggedIn, validationFailed }}
+        value={{ isLoggedIn, setIsLoggedIn, validationFailed, isLoading }}
       >
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <CurrentTemperatureUnitContext.Provider
@@ -288,7 +290,7 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <ProtectedRoute anonymous >
+                  <ProtectedRoute anonymous>
                     <Main
                       clothingItems={clothingItems}
                       weather={weather || {}}
@@ -302,7 +304,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute >
+                  <ProtectedRoute>
                     <Profile
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}

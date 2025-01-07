@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './EditProfileModal.css';
 import { CurrentUserContext } from '../../contexts/AppContexts';
@@ -14,6 +14,14 @@ function EditProfileModal({
   const { values, handleChange, setValues } = useForm({
     name: currentUser?.name,
     avatar: currentUser?.avatar,
+  });
+
+  const nameRef = useRef();
+  const imageUrlRef = useRef();
+
+  const isFormValid = Object.values(values).every((value, index) => {
+    const input = [nameRef.current, imageUrlRef.current][index];
+    return value.trim() !== '' && input?.validity.valid;
   });
 
   const handleSubmit = (e) => {
@@ -35,6 +43,7 @@ function EditProfileModal({
       title="Edit Profile"
       buttonText={isLoading ? 'Saving...' : 'Save'}
       name="log-in"
+      isFormValid={isFormValid}
     >
       <label htmlFor="owner-name" className="ModalWithForm__input-label">
         Name
@@ -49,6 +58,8 @@ function EditProfileModal({
         maxLength="30"
         value={values.name}
         onChange={handleChange}
+        ref={nameRef}
+        required
       />
       <label htmlFor="owner-avatar" className="ModalWithForm__input-label">
         Avatar
@@ -61,6 +72,8 @@ function EditProfileModal({
         name="avatar"
         value={values.avatar}
         onChange={handleChange}
+        ref={imageUrlRef}
+        required
       />
     </ModalWithForm>
   );

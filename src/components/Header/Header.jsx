@@ -35,7 +35,7 @@ function Header({
         <span className="Header__menu">
           <ToggleSwitch />
 
-          {isLoggedIn? (
+          {isLoggedIn ? (
             <>
               {' '}
               <button
@@ -47,7 +47,7 @@ function Header({
                 + Add clothes
               </button>{' '}
               <Link to="/profile" className="Header__nav-link">
-                <p className="Header__text">{currentUser?.name || "guest"}</p>
+                <p className="Header__text">{currentUser?.name || 'guest'}</p>
               </Link>
             </>
           ) : (

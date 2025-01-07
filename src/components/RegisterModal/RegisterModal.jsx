@@ -32,12 +32,16 @@ function RegisterModal({
   const passwordRef = useRef();
   const nameRef = useRef();
   const avatarRef = useRef();
-     
-     const isFormValid = Object.values(values).every((value, index) =>{
-       const input =  [emailRef.current, passwordRef.current, nameRef.current, avatarRef.current][index];;
-       return value.trim() !== "" && input?.validity.valid
-     } );
-  
+
+  const isFormValid = Object.values(values).every((value, index) => {
+    const input = [
+      emailRef.current,
+      passwordRef.current,
+      nameRef.current,
+      avatarRef.current,
+    ][index];
+    return value.trim() !== '' && input?.validity.valid;
+  });
 
   //Resetting the form values whenever the modal is closed
   useEffect(() => {
@@ -69,8 +73,6 @@ function RegisterModal({
         className={validationFailed ? failedValidationInput : validInput}
         placeholder="Email"
         id="registration-email"
-        minLength="1"
-        maxLength="30"
         name="email"
         value={values.email}
         onChange={handleChange}
@@ -88,7 +90,7 @@ function RegisterModal({
         id="password"
         name="password"
         minLength="8"
-        maxLength="14"
+        maxLength="16"
         value={values.password}
         onChange={handleChange}
         ref={passwordRef}

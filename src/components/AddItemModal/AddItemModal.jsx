@@ -20,12 +20,17 @@ function AddItemModal({
   const weatherHotRef = useRef();
   const weatherWarmRef = useRef();
   const weatherColdRef = useRef();
-  
-  const isFormValid = Object.values(values).every((value, index) =>{
-    const input =  [nameRef.current, imageUrlRef.current, 
-                   weatherHotRef.current, weatherWarmRef.current, weatherColdRef.current][index];;
-    return value.trim() !== "" && input?.validity.valid
-  } );
+
+  const isFormValid = Object.values(values).every((value, index) => {
+    const input = [
+      nameRef.current,
+      imageUrlRef.current,
+      weatherHotRef.current,
+      weatherWarmRef.current,
+      weatherColdRef.current,
+    ][index];
+    return value.trim() !== '' && input?.validity.valid;
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();

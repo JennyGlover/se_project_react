@@ -1,11 +1,14 @@
 import { useEffect, useState, useContext } from 'react';
-import { AuthenticationContext } from '../../contexts/AppContexts';
+import {
+  AuthenticationContext,
+  CurrentUserContext,
+} from '../../contexts/AppContexts';
 import './ItemCard.css';
 
 function ItemCard({ data, handleCardClick, onCardLike }) {
   const [likes, setLikes] = useState(data.likes || []);
   const { isLoggedIn } = useContext(AuthenticationContext);
-
+  const { currentUser } = useContext(CurrentUserContext);
   useEffect(() => {
     if (data.likes) {
       setLikes(data.likes);
@@ -17,7 +20,7 @@ function ItemCard({ data, handleCardClick, onCardLike }) {
     onCardLike(data);
   };
 
-  const isLiked = likes ? likes[0] : null;
+  const isLiked = likes?.includes(currentUser._id) || false;
   const itemLikeButtonClassName = `ItemCard__${!isLiked ? 'unlikedHeart' : 'likedHeart'}`;
 
   return (
