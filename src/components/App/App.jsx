@@ -136,7 +136,7 @@ function App() {
         setIsLoginModalVisible(true);
       })
       .catch((error) => {
-        if (error === 400) {
+        if (error === '400') {
           setValidationFailed(true);
         }
       })
@@ -160,8 +160,7 @@ function App() {
         // Navigate(redirectPath);
       })
       .catch((error) => {
-        console.error(error);
-        if (error === 401) {
+        if (error === '401') {
           setValidationFailed(true);
         }
       })
@@ -251,7 +250,13 @@ function App() {
   return (
     <div className="App">
       <AuthenticationContext.Provider
-        value={{ isLoggedIn, setIsLoggedIn, validationFailed, isLoading }}
+        value={{
+          isLoggedIn,
+          setIsLoggedIn,
+          validationFailed,
+          setValidationFailed,
+          isLoading,
+        }}
       >
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <CurrentTemperatureUnitContext.Provider

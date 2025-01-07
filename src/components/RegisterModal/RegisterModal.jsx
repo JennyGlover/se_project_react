@@ -17,7 +17,9 @@ function RegisterModal({
     name: '',
     avatar: '',
   });
-  const { validationFailed } = useContext(AuthenticationContext);
+  const { validationFailed, setValidationFailed } = useContext(
+    AuthenticationContext,
+  );
   const failedValidationInputLabel =
     'ModalWithForm__input-label RegistrationModal__incorrect-input';
   const failedValidationInput =
@@ -41,7 +43,7 @@ function RegisterModal({
       nameRef.current,
       avatarRef.current,
     ][index];
-    return value.trim() !== '' && input?.validity.valid;
+    return input?.validity.valid;
   });
 
   //Resetting the form values whenever the modal is closed
@@ -76,7 +78,12 @@ function RegisterModal({
         id="registration-email"
         name="email"
         value={values.email}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e);
+          if (e.target.value.trim() === '') {
+            setValidationFailed(false);
+          }
+        }}
         ref={emailRef}
         required
       />

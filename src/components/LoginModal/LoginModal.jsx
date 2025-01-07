@@ -22,10 +22,12 @@ function LoginModal({
 
   const isFormValid = Object.values(values).every((value, index) => {
     const input = [emailRef.current, passwordRef.current][index];
-    return value.trim() !== '' && input?.validity.valid;
+    return input?.validity.valid;
   });
 
-  const { validationFailed } = useContext(AuthenticationContext);
+  const { validationFailed, setValidationFailed } = useContext(
+    AuthenticationContext,
+  );
   const failedValidationInputLabel =
     'ModalWithForm__input-label LoginModal__incorrect-input';
   const failedValidationInput =
@@ -86,7 +88,12 @@ function LoginModal({
         minLength="8"
         maxLength="16"
         value={values.password}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e);
+          if (e.target.value.trim() === '') {
+            setValidationFailed(false);
+          }
+        }}
         ref={passwordRef}
         required
       />
