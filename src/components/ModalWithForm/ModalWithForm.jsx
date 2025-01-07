@@ -8,7 +8,7 @@ function ModalWithForm({
   title,
   buttonText,
   name,
-  isFormValid
+  isFormValid,
 }) {
   return (
     <div
@@ -28,7 +28,7 @@ function ModalWithForm({
           }}
         />
         {children}
-        <button type="submit" className="ModalWithForm__submit-button" disabled={!isFormValid}>
+        <button type="submit" className={isFormValid? "ModalWithForm__submit-button" : "ModalWithForm__submit-button-disabled" } >
           {buttonText}
         </button>
       </form>

@@ -26,7 +26,6 @@ function ClothesSection({
       <div className="ClothesSection__item-cards">
         {clothingItems
           .filter((item) =>{
-            console.log(item)
             return item.owner === currentUser._id
           }
             )  // Filter item that are owner's
