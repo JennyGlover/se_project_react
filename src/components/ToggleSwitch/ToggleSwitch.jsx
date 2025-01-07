@@ -22,14 +22,14 @@ function ToggleSwitch() {
         }
       ></span>
       <p
-        className={`ToggleSwitch__temp-F ${currentTemperatureUnit === 'F' && 'ToggleSwitch__active'}`}
-      >
-        F
-      </p>
-      <p
         className={`ToggleSwitch__temp-C ${currentTemperatureUnit === 'C' && 'ToggleSwitch__active'}`}
       >
         C
+      </p>
+      <p
+        className={`ToggleSwitch__temp-F ${currentTemperatureUnit === 'F' && 'ToggleSwitch__active'}`}
+      >
+        F
       </p>
     </label>
   );

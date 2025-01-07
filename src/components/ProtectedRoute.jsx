@@ -4,7 +4,7 @@ import { AuthenticationContext } from '../contexts/AppContexts';
 
 function ProtectedRoute({
   children,
-  anonymous = false,
+  anonymous,
   //indicates routes that can be visited anonymously (i.e., without authorization)
 }) {
   // Invoking the useLocation hook, accessing the value of the
