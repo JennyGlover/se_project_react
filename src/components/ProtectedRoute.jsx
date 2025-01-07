@@ -2,33 +2,25 @@ import { useContext, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthenticationContext } from '../contexts/AppContexts';
 
-function ProtectedRoute({
-  children,
-  anonymous = false,
-  //indicates routes that can be visited anonymously (i.e., without authorization)
-}) {
-  // Invoking the useLocation hook, accessing the value of the
-  // 'from' property from its state object or default to "/".
+function ProtectedRoute({ children, anonymous = false }) {
+  // Using useLocation to access route information
   const location = useLocation();
   const from = location.state?.from || '/';
 
-  // Destructuring isLoggedIn from the value provided by AuthenticationContext
+  // Destructuring context values
   const { isLoggedIn } = useContext(AuthenticationContext);
+  // Wait until authentication status is determined
 
-  useEffect(() => {
-    console.log('isLoggedIn:', isLoggedIn, 'Location:', location.pathname);
-  }, [location.pathname]);
+  if (anonymous && isLoggedIn) {
+    return <Navigate to={from} />;
+  }
 
-  // If user is not logged in and tries to access nonanonymous route redirect them to the main route.
+  //  If user is not logged in and route is not anonymous, redirect to "/"
+  if (!isLoggedIn && !anonymous) {
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
 
-  // if (!isLoggedIn) {
-  //   // While redirecting to /login set the location objects
-  //   // state.from property to store the current location value.
-  //   // to redirect them appropriately after login
-  //   return <Navigate to="/" />;
-  // }
-
-  // Otherwise, render the protected route's child component.
+  // 3. If the user is logged in or the route is anonymous, render children
   return children;
 }
 

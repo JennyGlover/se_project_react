@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
@@ -32,7 +32,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
   const [clothingItems, setClothingItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [validationFailed, setValidationFailed] = useState(false);
   const [currentUser, setCurrentUser] = useState({
@@ -41,6 +41,8 @@ function App() {
     _id: null,
   });
   const location = useLocation();
+  const navigate = useNavigate();
+  const jwt = getToken();
 
   const handleCardClick = (item, e) => {
     setSelectedItem(item);
@@ -82,7 +84,6 @@ function App() {
 
   //Adding a card
   const handleAddItemSubmit = (item) => {
-    const jwt = getToken();
     if (!jwt) {
       return;
     }
@@ -100,7 +101,6 @@ function App() {
 
   //Liking a card
   const handleCardLike = ({ _id, likes }) => {
-    const jwt = getToken();
     if (!jwt) {
       return;
     }
@@ -162,8 +162,6 @@ function App() {
 
   //Updating user profile
   const handleEditProfile = (item) => {
-    const jwt = getToken();
-
     if (!jwt) {
       return;
     }
@@ -179,11 +177,10 @@ function App() {
   };
 
   useEffect(() => {
-    const jwt = getToken();
     if (!jwt) {
       return;
     }
-
+    
     auth
       .getUserInfo(jwt)
       .then((res) => {
@@ -192,10 +189,9 @@ function App() {
         setIsLoggedIn(true);
       })
       .catch(console.error);
-  }, []);
+  }, [jwt]);
 
   const handleItemDelete = (id) => {
-    const jwt = getToken();
     if (!jwt) {
       return;
     }
@@ -237,6 +233,7 @@ function App() {
       })
       .catch(console.error);
   }, [clothingItems.length]); //need to remove this
+ 
 
   return (
     <div className="App">
@@ -287,8 +284,8 @@ function App() {
               setIsLoginModalVisible={setIsLoginModalVisible}
             />
             <Routes>
-              <Route
-                path="/"
+                 <Route
+                path="/login"
                 element={
                   <ProtectedRoute anonymous>
                     <Main
@@ -302,9 +299,23 @@ function App() {
                 }
               />
               <Route
-                path="/profile"
+                path="/"
                 element={
                   <ProtectedRoute>
+                    <Main
+                      clothingItems={clothingItems}
+                      weather={weather || {}}
+                      handleCardClick={handleCardClick}
+                      handleCloseModal={handleCloseModal}
+                      onCardLike={handleCardLike}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute >
                     <Profile
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
