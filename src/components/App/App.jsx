@@ -126,7 +126,6 @@ function App() {
   };
 
   const handleRegistration = ({ email, password, name, avatar }) => {
-    
     setIsLoading(true);
 
     auth
@@ -147,7 +146,6 @@ function App() {
   };
 
   const handleLogin = ({ email, password }) => {
-
     setIsLoading(true);
     auth
       .signin(email, password)
@@ -193,7 +191,7 @@ function App() {
     if (!jwt) {
       return;
     }
-    
+
     auth
       .getUserInfo(jwt)
       .then((res) => {
@@ -303,8 +301,8 @@ function App() {
               weather={weather || {}}
               setIsLoginModalVisible={setIsLoginModalVisible}
             />
-           <Routes>
-                 <Route
+            <Routes>
+              <Route
                 path="/login"
                 element={
                   <ProtectedRoute anonymous>
@@ -321,19 +319,19 @@ function App() {
               <Route
                 path="/"
                 element={
-                    <Main
-                      clothingItems={clothingItems}
-                      weather={weather || {}}
-                      handleCardClick={handleCardClick}
-                      handleCloseModal={handleCloseModal}
-                      onCardLike={handleCardLike}
-                    />
+                  <Main
+                    clothingItems={clothingItems}
+                    weather={weather || {}}
+                    handleCardClick={handleCardClick}
+                    handleCloseModal={handleCloseModal}
+                    onCardLike={handleCardLike}
+                  />
                 }
               />
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute >
+                  <ProtectedRoute>
                     <Profile
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
