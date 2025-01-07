@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useRef } from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import { AuthenticationContext } from '../../contexts/AppContexts';
 import useForm from '../../hooks/useForm';
@@ -28,6 +28,17 @@ function RegisterModal({
     handleRegistration(values);
   };
 
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const nameRef = useRef();
+  const avatarRef = useRef();
+     
+     const isFormValid = Object.values(values).every((value, index) =>{
+       const input =  [emailRef.current, passwordRef.current, nameRef.current, avatarRef.current][index];;
+       return value.trim() !== "" && input?.validity.valid
+     } );
+  
+
   //Resetting the form values whenever the modal is closed
   useEffect(() => {
     if (!isSignupModalVisible) {
@@ -43,6 +54,7 @@ function RegisterModal({
       title="Sign Up"
       buttonText={'Next'}
       name="log-in"
+      isFormValid={isFormValid}
     >
       <label
         htmlFor="registration-email"
@@ -62,6 +74,7 @@ function RegisterModal({
         name="email"
         value={values.email}
         onChange={handleChange}
+        ref={emailRef}
         required
       />
 
@@ -78,6 +91,7 @@ function RegisterModal({
         maxLength="14"
         value={values.password}
         onChange={handleChange}
+        ref={passwordRef}
         required
       />
 
@@ -94,6 +108,7 @@ function RegisterModal({
         maxLength="30"
         value={values.name}
         onChange={handleChange}
+        ref={nameRef}
         required
       />
 
@@ -108,6 +123,7 @@ function RegisterModal({
         name="avatar"
         value={values.avatar}
         onChange={handleChange}
+        ref={avatarRef}
         required
       />
       <p

@@ -35,7 +35,7 @@ function Header({
         <span className="Header__menu">
           <ToggleSwitch />
 
-          {isLoggedIn && currentUser.name ? (
+          {isLoggedIn? (
             <>
               {' '}
               <button
@@ -47,7 +47,7 @@ function Header({
                 + Add clothes
               </button>{' '}
               <Link to="/profile" className="Header__nav-link">
-                <p className="Header__text">{currentUser.name || 'Guest'}</p>
+                <p className="Header__text">{currentUser?.name || "guest"}</p>
               </Link>
             </>
           ) : (
@@ -73,7 +73,7 @@ function Header({
         </span>
 
         <div>
-          {isLoggedIn && currentUser?.avatar ? (
+          {isLoggedIn && currentUser.avatar ? (
             <img
               src={currentUser.avatar}
               className="Header__avatar"

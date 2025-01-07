@@ -86,7 +86,6 @@ function App() {
       return;
     }
 
-    setIsLoading(true);
     api
       .postItem(jwt, item)
       .then((newItem) => {
@@ -96,10 +95,7 @@ function App() {
         handleCloseModal();
       })
       .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  };;
 
   //Liking a card
   const handleCardLike = ({ _id, likes }) => {
@@ -121,6 +117,16 @@ function App() {
               : item,
           ),
         );
+        if (res.data.owner === currentUser?._id){
+           setCurrentUser((prevUser) => ({
+            ...prevUser,
+            name: prevUser.name,
+            avatar: prevUser.avatar,
+            _id: res.data.owner,
+          }));
+        }
+      
+        console.log(res.message + " by " + currentUser._id);
       })
       .catch(console.error);
   };
@@ -146,9 +152,10 @@ function App() {
       .then((data) => {
         setToken(data);
         setIsLoading(true);
-        setIsLoggedIn(true);
-
+        const { name, avatar, _id} = data;
+        setCurrentUser({ name, avatar, _id });
         //redirecting users to the original desired route
+        setIsLoggedIn(true);
         handleCloseModal();
       })
       .catch((error) => {
@@ -170,8 +177,8 @@ function App() {
     api
       .updateUserProfile(jwt, item)
       .then((res) => {
-        const { name, avatar } = res.data;
-        setCurrentUser({ name, avatar });
+        const { name, avatar, _id} = res. data;
+        setCurrentUser({ name, avatar, _id });
         handleCloseModal();
       })
       .catch(console.error);
