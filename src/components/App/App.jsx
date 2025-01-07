@@ -88,14 +88,13 @@ function App() {
     if (!jwt) {
       return;
     }
-
+    setIsLoading(true);
     api
       .postItem(jwt, item)
       .then((newItem) => {
         setClothingItems((prevItems) => {
           return [newItem, ...prevItems];
         });
-        setIsLoading(true);
         handleCloseModal();
       })
       .catch(console.error)
@@ -127,16 +126,18 @@ function App() {
   };
 
   const handleRegistration = ({ email, password, name, avatar }) => {
+    
+    setIsLoading(true);
+
     auth
       .signup(email, password, name, avatar)
       .then(() => {
         //Navigate to login
-        setIsLoading(true);
         handleCloseModal();
         setIsLoginModalVisible(true);
       })
       .catch((error) => {
-        if (error === '400') {
+        if (error.trim() === '400') {
           setValidationFailed(true);
         }
       })
@@ -146,6 +147,8 @@ function App() {
   };
 
   const handleLogin = ({ email, password }) => {
+
+    setIsLoading(true);
     auth
       .signin(email, password)
       .then((data) => {
@@ -153,14 +156,13 @@ function App() {
         const { name, avatar, _id } = data;
         setCurrentUser({ name, avatar, _id });
         //redirecting users to the original desired route
-        setIsLoading(true);
         setIsLoggedIn(true);
         handleCloseModal();
         // const redirectPath = location.state?.from?.pathname || "/";
         // Navigate(redirectPath);
       })
       .catch((error) => {
-        if (error === '401') {
+        if (error.trim() === '401') {
           setValidationFailed(true);
         }
       })
@@ -174,13 +176,12 @@ function App() {
     if (!jwt) {
       return;
     }
-
+    setIsLoading(true);
     api
       .updateUserProfile(jwt, item)
       .then((res) => {
         const { name, avatar, _id } = res.data;
         setCurrentUser({ name, avatar, _id });
-        setIsLoading(true);
         handleCloseModal();
       })
       .catch(console.error)
@@ -201,7 +202,7 @@ function App() {
         setCurrentUser({ name, avatar, _id });
       })
       .catch(console.error);
-  }, [jwt]);
+  }, []);
 
   const handleItemDelete = (id) => {
     if (!jwt) {
@@ -245,7 +246,7 @@ function App() {
         setClothingItems(filteredData);
       })
       .catch(console.error);
-  }, [clothingItems.length]); //need to remove this
+  }, []); //need to remove this
 
   return (
     <div className="App">
@@ -320,7 +321,7 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <ProtectedRoute>
+                    <ProtectedRoute>
                     <Main
                       clothingItems={clothingItems}
                       weather={weather || {}}
@@ -328,7 +329,7 @@ function App() {
                       handleCloseModal={handleCloseModal}
                       onCardLike={handleCardLike}
                     />
-                  </ProtectedRoute>
+                    </ProtectedRoute>
                 }
               />
               <Route

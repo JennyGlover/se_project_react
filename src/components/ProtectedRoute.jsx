@@ -18,6 +18,7 @@ function ProtectedRoute({ children, anonymous = false }) {
 
   //  If user is not logged in and route is not anonymous, redirect to "/"
   if (!isLoggedIn && !anonymous) {
+    console.log('not logged in')
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

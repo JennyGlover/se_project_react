@@ -22,7 +22,7 @@ function LoginModal({
 
   const isFormValid = Object.values(values).every((value, index) => {
     const input = [emailRef.current, passwordRef.current][index];
-    return input?.validity.valid;
+    return value.trim() !== '' && input?.validity.valid;
   });
 
   const { validationFailed, setValidationFailed } = useContext(

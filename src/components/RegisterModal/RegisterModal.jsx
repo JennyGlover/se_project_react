@@ -43,7 +43,7 @@ function RegisterModal({
       nameRef.current,
       avatarRef.current,
     ][index];
-    return input?.validity.valid;
+    return value.trim() !== '' && input?.validity.valid;
   });
 
   //Resetting the form values whenever the modal is closed
