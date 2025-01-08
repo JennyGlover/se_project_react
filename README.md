@@ -4,6 +4,12 @@ This project is a front-end web application built with **React** that helps user
 
 ---
 
+![Project screenshot](src/assets/WTWR-screenshot-4.png)
+![Project screenshot](src/assets/WTWR-screenshot-1.png)
+![Project screenshot](src/assets/wtwr-screenshot-2.png)
+![Project screenshot](src/assets/wtwr-screenshot-3.png)
+
+
 ## **Key Features**
 
 - **Dynamic Clothing Cards**: Clothing items are displayed as cards, each with an image and title, dynamically generated from a hard-coded data array.
