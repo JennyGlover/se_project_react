@@ -1,6 +1,6 @@
 # **WTWR - What To Wear React App** 🧥🧳
 
-This project is a front-end web application built with **React** that helps users decide what to wear based on the current weather. It fetches weather data via the **OpenWeather API**, and dynamically displays clothing recommendations based on the temperature. The app features a set of clothing cards, modals for item details, and filtering by weather conditions.
+This project is the React front-end of [**a full stack app**](https://github.com/JennyGlover/se_project_express), that helps users decide what to wear based on the current weather. After creating an account, users can customize clothing names, edit their profile details, like other users items, and keep a unique clothing collection in their portal. Clothing recommendations are dynamically displayed based on the current temperature, fetched via the OpenWeather API
 
 ---
 
